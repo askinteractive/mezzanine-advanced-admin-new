@@ -1,29 +1,22 @@
-django-admin-bootstrapped
+mezzanine-advanced-admin
 =========================
 
-|PyPI version|
-
-A Django admin theme using Bootstrap. It doesn't need any kind
-of modification on your side, just add it to the installed apps.
+A Mezzanine admin theme using Bootstrap with advanced utilities.
 
 Requirements
 ------------
 
--  Django ``==1.8``
-
-With Django ``1.6`` use version ``2.3.6``
-
-With Django ``1.7`` use version ``2.4.0``
+-  Mezzanine 4.0.1
 
 Installation
 ------------
 
-1. Download it from PyPi with ``pip install django-admin-bootstrapped``
+1. Download it 
 2. Add into the ``INSTALLED_APPS`` **before** ``'django.contrib.admin'``:
 
 ::
 
-    'django_admin_bootstrapped',
+    'mezzanine_advanced_admin',
 
 3. Have fun!
 
