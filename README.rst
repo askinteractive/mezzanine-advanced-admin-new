@@ -12,8 +12,10 @@ Installation
 ------------
 
 1. Download it 
-2. Add into the ``INSTALLED_APPS`` **before** ``'mezzanine.boot'``:
+2. Add into the ``INSTALLED_APPS`` **before** ``'mezzanine.boot'``
 3. Comment ``PACKAGE_NAME_GRAPPELLI`` and remove ``PACKAGE_NAME_GRAPPELLI`` and ``PACKAGE_NAME_FILEBROWSER`` from ``OPTIONAL_APPS``
+4. Set ``filebrowser`` as ``PACKAGE_NAME_FILEBROWSER`` and add ``filebrowser`` into the ``INSTALLED_APPS`` **before** ``django.contrib.admin``
+
 
 ::
 
