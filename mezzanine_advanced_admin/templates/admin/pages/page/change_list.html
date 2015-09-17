@@ -1,0 +1,50 @@
+{% extends "admin/change_list.html" %}
+{% load pages_tags i18n staticfiles %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>window.__page_ordering_url = '{% url "admin_page_ordering" %}';</script>
+{% if not settings.USE_MODELTRANSLATION %}
+{#<script src="{% static "admin/js/jquery-ui.min.js" %}"></script>#}
+{% endif %}
+{#<script src="{% static "admin/js/jquery.mjs.nestedSortable.js" %}"></script>#}
+<script src="{% static "admin/js/jquery.sortable.js" %}"></script>
+<script src="{% static "admin/js/page_tree.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <div>
+
+    {% if has_add_permission %}
+    <div id="addlist-primary" class="pull-right mb25">
+        <div class="dropdown">
+            <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
+            {% trans "Add" %} ...
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="addpage">
+                {% for model in page_models %}
+                <li>
+                    {% set_model_permissions model %}
+                    {% if model.perms.add %}
+                    <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="clearfix"></div>
+
+    {% if cl.result_count == 0 %}
+    <p class="paginator">0 {{ cl.opts.verbose_name_plural }}</p>
+    {% else %}
+    <div id="tree">{% page_menu "pages/menus/admin.html" %}</div>
+    {% endif %}
+    </div>
+
+</div>
+{% endblock %}

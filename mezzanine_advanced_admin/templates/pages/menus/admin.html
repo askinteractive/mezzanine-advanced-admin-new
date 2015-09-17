@@ -1,0 +1,99 @@
+{% load pages_tags i18n staticfiles %}
+<style>
+    #tree {
+        width: 100%;
+    }
+    .page-title-wrapper>div {
+        display: inline-block;
+    }
+    #tree .row {
+        padding: 10px 0;
+        background: #e7e7e7;
+        border: 1px solid #f8f8f8;
+        font-size: 110%;
+    }
+    #tree ol {
+        list-style: none;
+    }
+    .tree-toggle {
+        margin-right: 20px;
+        cursor: pointer;
+    }
+    .mr10 {
+        margin-right: 10px;
+    }
+    .mb25 {
+        margin-bottom: 25px;
+    }
+    .page-title-wrapper {
+        margin-top: 8px;
+    }
+</style>
+<ol>
+    {% for page in page_branch %}
+    {% set_page_permissions page %}
+    <li id="ordering_{{ page.id }}" class="{% cycle 'row1' 'row2' %} page-tree-level-{{ branch_level }}">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="page-title-wrapper">
+                    <div class="tree-toggle" id="page-{{ page.id }}">
+                        <span class="btn-link">
+                            <span class="glyphicon glyphicon-plus-sign page-tree-icon page-tree-open"></span>
+                            <span class="glyphicon glyphicon-minus-sign page-tree-icon page-tree-close" style="display: none"></span>
+                        </span>
+                    </div>
+
+                     <div>
+                        {% if page.perms.change %}
+                        <a href="{% url "admin:pages_page_change" page.id %}{% if not page.is_primary %}?parent={{ page.parent_id }}{% endif %}"
+                            class="changelink">
+                            <span class="glyphicon glyphicon-menu-hamburger mr10"></span>{{ page.title.strip|default:"&nbsp;" }}
+                        </a>
+
+                        {% else %}
+                        <span class="uneditable">{{ page.title }}</span>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="pull-right">
+                    {% if page.perms.add %}
+                    <div class="btn-group" role="group">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="addpage-{{ page.id }}" data-toggle="dropdown" aria-haspopup="true">
+                            {% trans "Add" %} ...
+                            <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu addlist" aria-labelledby="addpage-{{ page.id }}" id="addlink-{{ page.id }}">
+                                {% for model in page_models %}
+                                <li>
+                                    {% set_model_permissions model %}
+                                    {% if model.perms.add %}
+                                    <a href="{{ model.add_url }}?parent={{ page.id }}">{{ model.meta_verbose_name|capfirst }}</a>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% if page.perms.change %}
+                        <span class="btn btn-default ordering">
+                            <span class="glyphicon glyphicon-move"></span>
+                        </span>
+                        {% endif %}
+                        {% if page.perms.delete %}
+                        <a href="{% url "admin:pages_page_delete" page.id %}?fromtree" class="btn btn-default">
+                            <span class="delete glyphicon glyphicon-remove-sign"></span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if page.has_children %}{% page_menu page %}{% endif %}
+    </li>
+    {% endfor %}
+</ol>
