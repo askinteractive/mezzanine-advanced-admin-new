@@ -28,7 +28,7 @@ There's one available in tree that requires the ``django-bootstrap3`` applicatio
 You have to add to your project settings file:
 ::
 
-    DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
+    DAB_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
 
 
 `Messages <http://docs.djangoproject.com/en/dev/ref/contrib/messages>`__ will have ``alert-info`` tag by default, 
@@ -87,12 +87,12 @@ accordingly), for example:
             ordering = ('position', )
 
 Then in your admin.py create a class to handle the inline using the
-``django_admin_bootstrapped.admin.models.SortableInline`` mixin, like
+``mezzanine_advanced_admin.admin.models.SortableInline`` mixin, like
 this:
 
 ::
 
-    from django_admin_bootstrapped.admin.models import SortableInline
+    from mezzanine_advanced_admin.admin.models import SortableInline
     from models import TestSortable
 
     class TestSortable(admin.StackedInline, SortableInline):
@@ -120,7 +120,7 @@ formfield\_overrides like this:
 
 ::
 
-    from django_admin_bootstrapped.widgets import GenericContentTypeSelect
+    from mezzanine_advanced_admin.widgets import GenericContentTypeSelect
 
     class SomeModelAdmin(admin.ModelAdmin):
         formfield_overrides = {
@@ -131,7 +131,7 @@ Or if you want to be more specific:
 
 ::
 
-    from django_admin_bootstrapped.widgets import GenericContentTypeSelect
+    from mezzanine_advanced_admin.widgets import GenericContentTypeSelect
 
     class SomeModelAdmin(admin.ModelAdmin):
         def formfield_for_dbfield(self, db_field, **kwargs):

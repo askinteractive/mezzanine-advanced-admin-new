@@ -1,5 +1,5 @@
 """
-WSGI config for test_django_admin_bootstrapped_p3 project.
+WSGI config for test_mezzanine_advanced_admin_p3 project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_django_admin_bootstrapped.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test_mezzanine_advanced_admin.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

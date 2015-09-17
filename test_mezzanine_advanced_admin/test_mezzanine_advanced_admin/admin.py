@@ -2,7 +2,7 @@ from django.forms.widgets import CheckboxSelectMultiple
 from django.contrib import admin
 from django.db import models
 
-from django_admin_bootstrapped.admin.models import SortableInline
+from mezzanine_advanced_admin.admin.models import SortableInline
 
 from .models import TestMe, TestThat, TestMeProxyForFieldsets, TestSortable
 

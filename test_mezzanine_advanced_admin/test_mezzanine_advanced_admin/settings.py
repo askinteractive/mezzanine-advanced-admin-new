@@ -1,5 +1,5 @@
 """
-Django settings for test_django_admin_bootstrapped project.
+Django settings for test_mezzanine_advanced_admin project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'bootstrap3',
-    'django_admin_bootstrapped',
+    'mezzanine_advanced_admin',
     'filer',
     'easy_thumbnails',
     'django.contrib.admin',
@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'test_django_admin_bootstrapped',
+    'test_mezzanine_advanced_admin',
     'CapitalApp',
 )
 
@@ -60,9 +60,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
 )
 
-ROOT_URLCONF = 'test_django_admin_bootstrapped.urls'
+ROOT_URLCONF = 'test_mezzanine_advanced_admin.urls'
 
-WSGI_APPLICATION = 'test_django_admin_bootstrapped.wsgi.application'
+WSGI_APPLICATION = 'test_mezzanine_advanced_admin.wsgi.application'
 
 
 # Database
@@ -88,7 +88,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
+DAB_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

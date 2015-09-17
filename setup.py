@@ -17,23 +17,21 @@ CLASSIFIERS = [
 ]
 
 setup(
-    author="Riccardo Forina",
-    author_email="riccardo@forina.me",
-    maintainer="Riccardo Magliocchetti",
-    maintainer_email="riccardo.magliocchetti@gmail.com",
-    name='django-admin-bootstrapped',
-    version='2.5.5',
-    description='A Bootstrap theme for Django Admin',
+    authors=["Aymeric Bois","Xavier Amiot"],
+    author_emails=["abois@askin.fr","xamiot@askin.fr"],
+    name='mezzanine-advanced-admin',
+    version='0.0.1',
+    description='A Bootstrap theme for Django Mezzanine Admin with advanced features',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
-    url='https://github.com/django-admin-bootstrapped/django-admin-bootstrapped',
+    url='https://github.com/abois/mezzanine-advanced-admin',
     license='BSD License',
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
     install_requires=[
         'setuptools',
-        'Django>=1.8',
+        'Mezzanine>=4.0.1'
     ],
-    test_suite='django_admin_bootstrapped.runtests.runtests',
+    test_suite='mezzanine_advanced_admin.runtests.runtests',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False
