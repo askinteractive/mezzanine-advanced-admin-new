@@ -12,7 +12,7 @@ Installation
 ------------
 
 1. Download it 
-2. Add into the ``INSTALLED_APPS`` **before** ``'django.contrib.admin'``:
+2. Add into the ``INSTALLED_APPS`` **before** ``'mezzanine.boot'``:
 
 ::
 
