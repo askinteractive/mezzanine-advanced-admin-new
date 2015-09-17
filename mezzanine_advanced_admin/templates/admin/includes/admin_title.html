@@ -1,0 +1,5 @@
+{% if logo_path %}
+<img src="{{ STATIC_URL }}{{ logo_path }}" alt="{{ title }}" height="40"><span class="hidden-xs">{{ title }}</span>
+{% else %}
+{{ title }}
+{% endif %}

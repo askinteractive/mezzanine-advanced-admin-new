@@ -1,8 +1,9 @@
 from importlib import import_module
 
-from django import template
-from django.conf import settings
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
+from mezzanine import template
+from mezzanine.conf import settings
 
 
 register = template.Library()
@@ -117,3 +118,12 @@ def custom_field_rendering(context, field, *args, **kwargs):
         if field_renderer:
             return field_renderer(field, **kwargs).render()
     return field
+
+
+@register.inclusion_tag("admin/includes/admin_title.html", takes_context=True)
+def admin_title(context):
+    title = getattr(settings, "ADVANCED_ADMIN_TITLE", _("%s - Administration" % settings.SITE_TITLE))
+    logo_path = getattr(settings, "ADVANCED_ADMIN_LOGO_PATH", None)
+    context["title"] = title
+    context["logo_path"] = logo_path
+    return context
