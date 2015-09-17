@@ -9,7 +9,8 @@ from mezzanine.conf import settings
 register = template.Library()
 
 
-CUSTOM_FIELD_RENDERER = getattr(settings, 'DAB_FIELD_RENDERER', False)
+CUSTOM_FIELD_RENDERER = getattr(settings, 'ADVANCED_ADMIN_FIELD_RENDERER',
+                                'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer')
 
 
 @register.simple_tag(takes_context=True)
