@@ -13,6 +13,7 @@ Installation
 
 1. Download it 
 2. Add into the ``INSTALLED_APPS`` **before** ``'mezzanine.boot'``:
+3. Comment ``PACKAGE_NAME_GRAPPELLI`` and remove ``PACKAGE_NAME_GRAPPELLI`` and ``PACKAGE_NAME_FILEBROWSER`` from ``OPTIONAL_APPS``
 
 ::
 
