@@ -285,3 +285,12 @@ p.file-upload > input[type="file"] {
   background-color: #337ab7;
   border-color: #337ab7;
 }
+
+.menu-fixed {
+    background-color: #555
+}
+
+.menu-fixed strong {
+    color:#FFFFFF;
+
+}

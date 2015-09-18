@@ -44,11 +44,12 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
 
 <!-- Container -->
-<div class="container">
+{% render_menu %}
+<div class="col-sm-9">
 
     {% if not is_popup %}
     <!-- Header -->
-    <div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar navbar-default">
         <div class="navbar-inner">
             <div class="container">
                 <div class="navbar-header">
@@ -136,7 +137,7 @@
     {% endif %}
 
     <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
+    <div id="content" class=" col-sm-9">
         {% block navbar %}
         <div class="navbar navbar-default">
             <div class="navbar-inner">
@@ -156,7 +157,9 @@
                     {% endif %}
                     {% endblock %}
                     </div>
+                {% comment %}
                 {% block object-tools %}{% endblock %}
+                {% endcomment %}
             </div>
         </div>
         {% endblock navbar %}
