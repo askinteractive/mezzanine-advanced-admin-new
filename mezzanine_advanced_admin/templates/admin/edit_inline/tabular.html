@@ -32,9 +32,11 @@
         <tr class="form-row {% cycle "row1" "row2" %} {% if inline_admin_form.original or inline_admin_form.show_url %}has_original{% endif %}{% if forloop.last %} empty-form{% endif %}"
              id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
         <td class="original">
+          {% comment %}
           {% if inline_admin_formset.opts.sortable_field_name %}
           <span class="btn btn-default btn-xs drag-handler pull-left"><i class="glyphicon glyphicon-move"></i></span>
           {% endif %}
+          {% endcomment %}
           {% if inline_admin_form.original or inline_admin_form.show_url %}<p>
           {% if inline_admin_form.original %} {{ inline_admin_form.original }}
           {% if inline_admin_form.model_admin.show_change_link and inline_admin_form.model_admin.has_registered_model %}<a href="{% url inline_admin_form.model_admin.opts|admin_urlname:'change' inline_admin_form.original.pk|admin_urlquote %}" class="inlinechangelink">{% trans "Change" %}</a>{% endif %}
@@ -65,7 +67,11 @@
                   {% if field.errors %}
                   <div class="alert alert-danger">{{ field.errors|striptags }}</div>
                   {% endif %}
-                  {% dab_field_rendering field.field %}
+                  {% if field.field.name == "_order" %}
+                      <span class="btn btn-default btn-xs drag-handler pull-left"><i class="glyphicon glyphicon-move"></i></span>
+                  {% else %}
+                      {% dab_field_rendering field.field %}
+                  {% endif %}
               {% endif %}
               </td>
               {% endif %}
@@ -147,14 +153,14 @@
 
 // listener for jquery 1.7.2
 (function($) {
-    {% if inline_admin_formset.opts.sortable_field_name %}
+    {# FIXME add js check for _order #}
     $('tbody').sortable({
-        // items: '.dynamic-{{ inline_admin_formset.formset.prefix }}',
+        items: '.dynamic-{{ inline_admin_formset.formset.prefix }}',
         handle: '.drag-handler',
         items: ".form-row"
     });
     $("#{{ opts.model_name }}_form").submit(function(e) {
-        var sortable_field_name = "{{ inline_admin_formset.opts.sortable_field_name }}",
+        var sortable_field_name = "_order",
             i = 0;
         var initial_form_count = $('#id_{{ inline_admin_formset.formset.prefix }}-INITIAL_FORMS').val();
 
@@ -166,6 +172,5 @@
             }
         });
     });
-    {% endif %}
 })(jQuery);
 </script>
