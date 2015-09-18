@@ -1,5 +1,5 @@
 
-jQuery(function($) {
+jQuery(document).ready(function($) {
 
     var cookie = 'mezzanine-admin-tree';
     var at = ('; ' + document.cookie).indexOf('; ' + cookie + '=');
@@ -75,25 +75,31 @@ jQuery(function($) {
 
     // AJAX callback that's triggered when dragging a page to re-order
     // it has ended.
-    var updateOrdering = function(event, ui) {
-        var parent = ui.item.parents('li:first');
+    //var updateOrdering = function(event, ui) {
+    //    var parent = ui.item.parents('li:first');
+    //
+    //    var args = {
+    //        id: ui.item[0].id,
+    //        parent_id: parent.length ? parent[0].id : "null",
+    //        siblings: ui.item.parent().children().map(function(index, elem) {
+    //            return elem.id;
+    //        }).get()
+    //    };
+    //
+    //    $.post(window.__page_ordering_url, args, function(data) {
+    //        if (String(data).substr(0, 2) !== "ok") {
+    //            location.reload();
+    //        } else {
+    //            $(".messagelist").remove();
+    //        }
+    //    });
+    //
+    //    showButtonWithChildren();
+    //};
 
-        var args = {
-            id: ui.item[0].id,
-            parent_id: parent.length ? parent[0].id : "null",
-            siblings: ui.item.parent().children().map(function(index, elem) {
-                return elem.id;
-            }).get()
-        };
-
-        $.post(window.__page_ordering_url, args, function(data) {
-            if (String(data).substr(0, 2) !== "ok") {
-                location.reload();
-            } else {
-                $(".messagelist").remove();
-            }
-        });
-
+    var updateOrdering = function ($item, container, _super, event) {
+        $item.removeClass(container.group.options.draggedClass).removeAttr("style");
+        $("body").removeClass(container.group.options.bodyClass);
         showButtonWithChildren();
     };
 
@@ -101,10 +107,14 @@ jQuery(function($) {
     // The `connectWith` option needs to be set separately to get
     // around a performance bug with `sortable`.
     $('#tree > ol').sortable({
-        //handle: '.ordering',
-        itemSelector: 'li',
+        handle: '.ordering',
+        onDrop: updateOrdering,
+        placeholderClass: "tree-placeholder",
+        placeholder: '<li class="tree-placeholder"></li>',
         nested: true,
-        vertical: true
+        vertical: true,
+        tolerance: 10
+        //itemSelector: 'li',
         //toleranceElement: '> div',
         //opacity: 0.5,
         //stop: updateOrdering,
