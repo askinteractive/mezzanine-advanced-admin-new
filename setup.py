@@ -30,6 +30,7 @@ setup(
     install_requires=[
         'setuptools',
         'Mezzanine>=4.0.1'
+        'django-bootstrap3'
     ],
     test_suite='mezzanine_advanced_admin.runtests.runtests',
     packages=find_packages(),
