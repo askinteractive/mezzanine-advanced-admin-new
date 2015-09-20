@@ -12,12 +12,13 @@
         {% endif %}
     </legend>
     {% endif %}
-    <div class="fields {% if not errors %}{{ fieldset.classes }}{% endif %}">
+    <div class="fields {% if not errors %}{{ fieldset.classes }}{% endif %}{% if fieldset.classes == "collapse-closed" %} collapse{% endif %}"{% if fieldset.classes == "collapsed-closed" %}aria-expanded="false"{% endif %}>
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}
         {% for line in fieldset %}
-            <div class="row"><div class="control-group {% if line.fields|length_is:'1' and line.errors %} error{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% endfor %}">
+            <div class="row">
+                <div class="control-group{% if line.fields|length_is:'1' and line.errors %} error{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% endfor %}">
                 {% for field in line %}
                     <div class="col-md-{{ group_column_width }} form-group {% if not line.fields|length_is:'1' %} field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}{% endif %}">
                         <div class="control-label col-md-3">
