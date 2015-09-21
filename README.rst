@@ -89,7 +89,7 @@ accordingly), for example:
             ordering = ('position', )
 
 Then in your admin.py create a class to handle the inline using the
-``mezzanine_advanced_admin.admin.models.SortableInline`` mixin, like
+``mezzanine_advanced_admin.models.SortableInline`` mixin, like
 this:
 
 ::
