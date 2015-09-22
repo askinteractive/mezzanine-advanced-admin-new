@@ -19,7 +19,6 @@ a:focus {
     color: #333;
 }
 #admin-title img {
-    background: #f8f8f8;
     padding: 10px 20px;
     margin-right: 15px;
     height: 50px;
@@ -286,11 +285,64 @@ p.file-upload > input[type="file"] {
   border-color: #337ab7;
 }
 
-.menu-fixed {
-    background-color: #555
+.dashboard {
+  padding-top: 0;
 }
 
-.menu-fixed strong {
-    color:#FFFFFF;
+body {
+  padding-top: 0;
+}
 
+.navbar {
+  margin-bottom: 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  background-color: #FFF;
+}
+
+.breadcrumb {
+  margin-top: 20px;
+}
+
+/* Menu */
+.menu-fixed {
+    background-color: #2B323A;
+    height: 1350px;
+    position: relative;
+    padding: 0;
+}
+
+.menu-fixed .navbar-brand span {
+  display: none;
+}
+
+.menu-fixed ul {
+  padding: 0;
+}
+
+.menu-fixed li {
+    list-style: none;
+}
+
+.menu-fixed li:hover {
+    background-color: #313942;
+    color:#3f3f3f;
+}
+
+.menu-fixed li:first-child {
+  margin-top: 20px
+}
+
+.menu-fixed li a  {
+    color:#CCC;
+    margin-left:20px;
+    padding: 12px 0px;
+    display: block;
+}
+
+.menu-fixed li a:hover {
+  text-decoration: none;
+}
+
+.right-panel h2 a {
+  color: #555;
 }
