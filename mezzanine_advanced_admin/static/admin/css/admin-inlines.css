@@ -1,2 +1,5 @@
+.inline-related table td:not([colspan=10]), .inline-related table th {text-align: center}
+.delete input {display: none}
 .sortable-placeholder {border: 1px dashed #ccc;}
 .field-_order .ordering {display: none} /* Hide Mezzanine's order widget */
+tr.deleted {opacity: 0.5}
