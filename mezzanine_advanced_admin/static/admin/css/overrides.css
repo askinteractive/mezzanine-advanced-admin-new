@@ -292,7 +292,7 @@ p.file-upload > input[type="file"] {
     .page-title-wrapper>div {
         display: inline-block;
     }
-    #tree .page>div.row {
+    #tree .page>div {
         padding: 10px 0;
         background: #e7e7e7;
         border: 1px solid #f8f8f8;
@@ -301,9 +301,10 @@ p.file-upload > input[type="file"] {
     #tree ol {
         list-style: none;
     }
-    .tree-toggle {
+    .tree-toggle .btn-link{
         margin-right: 20px;
         cursor: pointer;
+        text-decoration: none;
     }
     .mr10 {
         margin-right: 10px;
@@ -311,14 +312,11 @@ p.file-upload > input[type="file"] {
     .mb25 {
         margin-bottom: 25px;
     }
-    .page-title-wrapper {
-        margin-top: 8px;
-    }
-    #tree .tree-placeholder .row {
+    #tree .placeholder .row {
         height: 50px;
         border: 1px dashed #333;
     }
-.placeholder {
+    #tree .placeholder {
 			outline: 1px dashed #4183C4;
 		}
 li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
