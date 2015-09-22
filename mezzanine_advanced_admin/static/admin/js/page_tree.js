@@ -55,6 +55,8 @@ jQuery(document).ready(function($) {
         });
     }
 
+    $('#tree ol').find('ol:not(:has(li.page))').show();
+
     // The dropdown list for adding a new page contains URLs for each
     // model - redirect when selected.
     $('.addlist a').click(function(e) {
@@ -97,35 +99,6 @@ jQuery(document).ready(function($) {
 
         showButtonWithChildren();
     };
-
-    //var updateOrdering = function ($item, container, _super, event) {
-    //    /**/
-    //    $item.removeClass(container.group.options.draggedClass).removeAttr("style");
-    //    $("body").removeClass(container.group.options.bodyClass);
-    //
-    //    /* Send ajax */
-    //    var parent = $item.parents('li:first');
-    //
-    //    var args = {
-    //        id: $item[0].id,
-    //        parent_id: parent.length ? parent[0].id : "null",
-    //        siblings: $item.parent().children().map(function(index, elem) {
-    //            return elem.id;
-    //        }).get(),
-    //        csrfmiddlewaretoken: window.__csrf_token
-    //    };
-    //
-    //    $.post(window.__page_ordering_url, args, function(data) {
-    //        if (String(data).substr(0, 2) !== "ok") {
-    //            location.reload();
-    //        } else {
-    //            $(".messagelist").remove();
-    //        }
-    //    });
-    //
-    //    /**/
-    //    showButtonWithChildren();
-    //};
 
     // Make the pages sortable via drag and drop.
     // The `connectWith` option needs to be set separately to get
