@@ -4,45 +4,10 @@
 {% block extrahead %}
 {{ block.super }}
 <script>window.__page_ordering_url = '{% url "admin_page_ordering" %}';</script>
-<script src="{% static "admin/js/jquery-sortable.js" %}"></script>
+{#<script src="{% static "admin/js/jquery-sortable.js" %}"></script>#}
+<script src="{% static "admin/js/jquery-ui-1.10.4.custom.min.js" %}"></script>
+<script src="{% static "admin/js/jquery.nestedSortable.js" %}"></script>
 <script src="{% static "admin/js/page_tree.js" %}"></script>
-<style>
-    #tree {
-        width: 100%;
-    }
-    .page-title-wrapper>div {
-        display: inline-block;
-    }
-    #tree .row {
-        padding: 10px 0;
-        background: #e7e7e7;
-        border: 1px solid #f8f8f8;
-        font-size: 110%;
-    }
-    #tree ol {
-        list-style: none;
-    }
-    .tree-toggle {
-        margin-right: 20px;
-        cursor: pointer;
-    }
-    .mr10 {
-        margin-right: 10px;
-    }
-    .mb25 {
-        margin-bottom: 25px;
-    }
-    .page-title-wrapper {
-        margin-top: 8px;
-    }
-    #tree .tree-placeholder {
-        height: 50px;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        border: 1px dashed #333;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
