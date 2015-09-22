@@ -1,5 +1,5 @@
 class SortableInline(object):
-    sortable_field_name = "position"
+    sortable_field_name = "_order"
 
     class Media:
         js = (

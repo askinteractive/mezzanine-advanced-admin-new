@@ -10,11 +10,6 @@
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
-    <style>
-    .tabular .field-_order {
-        display: none;
-    }
-    </style>
 {% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}

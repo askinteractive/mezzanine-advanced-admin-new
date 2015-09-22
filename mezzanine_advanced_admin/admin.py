@@ -1,8 +1,9 @@
 #encoding: utf-8
 from django.contrib import admin
 from django.contrib.admin import TabularInline
-from django.forms import HiddenInput
+from django.forms import HiddenInput, CharField
 from mezzanine.core.fields import OrderField
+from mezzanine.core.models import Orderable
 from mezzanine.forms.admin import FormAdmin
 from mezzanine.forms.models import Form, Field
 from mezzanine.galleries.admin import GalleryAdmin
@@ -16,7 +17,7 @@ class AdvancedFieldAdmin(SortableInline, TabularInline):
     Change Mezzanine Tabular for Field inline.
     """
     model = Field
-    extra = 1
+    extra = 0
 
 
 class AdvancedFormAdmin(FormAdmin):
@@ -24,7 +25,6 @@ class AdvancedFormAdmin(FormAdmin):
     Use a custom Tabular inline.
     """
     inlines = [AdvancedFieldAdmin]
-    sortable_field_name = "_order"
 
 
 admin.site.unregister(Form)
@@ -37,7 +37,7 @@ class AdvancedGalleryImageAdmin(SortableInline, TabularInline):
     Change Mezzanine Tabular for GalleryImage inline.
     """
     model = GalleryImage
-    extra = 1
+    extra = 0
 
 
 class AdvancedGalleryAdmin(GalleryAdmin):
