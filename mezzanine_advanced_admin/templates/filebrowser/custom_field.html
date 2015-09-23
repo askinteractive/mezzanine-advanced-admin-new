@@ -1,7 +1,7 @@
 {% load i18n fb_versions %}
 <div class="row">
-    <div class="col-xs-3">
     {% if value.filetype == "Image" and value.exists %}
+    <div class="col-xs-3">
         {% version_object value.path final_attrs.ADMIN_THUMBNAIL as thumbnail_version %}
         {% if thumbnail_version %}
         <p class="preview" id="preview_{{ final_attrs.id }}">
@@ -16,6 +16,7 @@
             </a>
         </p>
         {% endif %}
+    </div>
     {% else %}
         <p class="preview" id="preview_{{ final_attrs.id }}" style="display: none;">
             <a href="javascript://" target="_self" id="previewlink_{{ final_attrs.id }}">
@@ -23,9 +24,8 @@
             </a>
         </p>
     {% endif %}
-    </div>
 
-    <div class="col-xs-9">
+    <div class="{% if value.filetype == "Image" and value.exists %}col-xs-9{% else %}col-xs-12{% endif %}">
         <div class="input-group">
             <input id="{{ final_attrs.id }}" type="text" class="vFileBrowseField{% if final_attrs.class %} {{ final_attrs.class }}{% endif %}" name="{{ final_attrs.name }}" value="{{ value.path }}" readonly/>
             <span class="input-group-btn">
