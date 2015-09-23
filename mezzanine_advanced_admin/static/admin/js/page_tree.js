@@ -120,4 +120,9 @@ jQuery(document).ready(function($) {
         startCollapsed: true
     });
 
+    $('#menu-filter select').on('change', function () {
+        $('.page').css('opacity', '0.4');
+        $('[data-menus~=' + $(this).val() + ']').css('opacity', '1');
+    });
+
 });

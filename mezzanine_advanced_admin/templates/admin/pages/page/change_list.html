@@ -1,48 +1,70 @@
 {% extends "admin/change_list.html" %}
-{% load pages_tags i18n staticfiles %}
+{% load pages_tags i18n staticfiles advanced_admin_tags admin_list %}
 
 {% block extrahead %}
-{{ block.super }}
-<script>window.__page_ordering_url = '{% url "admin_page_ordering" %}';</script>
-{#<script src="{% static "admin/js/jquery-sortable.js" %}"></script>#}
-<script src="{% static "admin/js/jquery-ui-1.10.4.custom.min.js" %}"></script>
-<script src="{% static "admin/js/jquery.nestedSortable.js" %}"></script>
-<script src="{% static "admin/js/page_tree.js" %}"></script>
+    {{ block.super }}
+    <script>window.__page_ordering_url = '{% url "admin_page_ordering" %}';</script>
+    {#<script src="{% static "admin/js/jquery-sortable.js" %}"></script>#}
+    <script src="{% static "admin/js/jquery-ui-1.10.4.custom.min.js" %}"></script>
+    <script src="{% static "admin/js/jquery.nestedSortable.js" %}"></script>
+    <script src="{% static "admin/js/page_tree.js" %}"></script>
 {% endblock %}
 
-{% block content %}
-<div id="content-main">
-    <div>
+{% block navbar %}{% endblock %}
+{% block object-tools %}{% endblock %}
 
-    {% if has_add_permission %}
-    <div id="addlist-primary" class="pull-right mb25">
-        <div class="dropdown">
-            <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
-            {% trans "Add" %} ...
-            <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="addpage">
-                {% for model in page_models %}
-                <li>
-                    {% set_model_permissions model %}
-                    {% if model.perms.add %}
-                    <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="menu-filter" class="row">
+                <div class="col-xs-3">
+                    {% get_menus_for_page as menus %}
+                    <select class="form-control lg">
+                        <option value=""><span class="glyphicon glyphicon-filter"></span>
+                            {% trans "Filter by menu" %} ...
+                            <span class="caret"></span>
+                        </option>
+
+                        {% for menu_id, menu_name, menu_template in menus %}
+                        <option value="{{ menu_name|slugify }}">{{ menu_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            {% if has_add_permission %}
+                <div id="addlist-primary" class="pull-right mb25">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            {% trans "Add" %} ...
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="addpage">
+                            {% for model in page_models %}
+                                <li>
+                                    {% set_model_permissions model %}
+                                    {% if model.perms.add %}
+                                        <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
 
-    <div class="clearfix"></div>
+    <div id="content-main">
+        <div>
+            {% if cl.result_count == 0 %}
+                <p class="paginator">0 {{ cl.opts.verbose_name_plural }}</p>
+            {% else %}
+                <div id="tree">{% page_menu "pages/menus/admin.html" %}</div>
+            {% endif %}
+        </div>
 
-    {% if cl.result_count == 0 %}
-    <p class="paginator">0 {{ cl.opts.verbose_name_plural }}</p>
-    {% else %}
-    <div id="tree">{% page_menu "pages/menus/admin.html" %}</div>
-    {% endif %}
     </div>
-
-</div>
 {% endblock %}
