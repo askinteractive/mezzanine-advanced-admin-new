@@ -129,3 +129,7 @@ def admin_title(context):
     context["title"] = title
     context["logo_path"] = logo_path
     return context
+
+@register.inclusion_tag("admin/includes/menu.html", takes_context=True)
+def render_menu(context):
+    return  context
