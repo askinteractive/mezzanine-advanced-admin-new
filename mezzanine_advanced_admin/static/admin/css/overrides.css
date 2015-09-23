@@ -285,3 +285,6 @@ p.file-upload > input[type="file"] {
   background-color: #337ab7;
   border-color: #337ab7;
 }
+.mr15 {
+    margin-right: 15px;
+}

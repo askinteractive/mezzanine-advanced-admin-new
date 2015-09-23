@@ -1,0 +1,43 @@
+{% load i18n fb_versions %}
+<div class="row">
+    <div class="col-xs-3">
+    {% if value.filetype == "Image" and value.exists %}
+        {% version_object value.path final_attrs.ADMIN_THUMBNAIL as thumbnail_version %}
+        {% if thumbnail_version %}
+        <p class="preview" id="preview_{{ final_attrs.id }}">
+            <a href="{{ value.url }}" target="_blank" id="previewlink_{{ final_attrs.id }}">
+                <img id="previewimage_{{ final_attrs.id }}" src="{{ thumbnail_version.url }}" class="preview img-responsive img-thumbnail" />
+            </a>
+        </p>
+        {% else %}
+        <p class="preview" id="preview_{{ final_attrs.id }}" style="display: none;">
+            <a href="javascript://" target="_self" id="previewlink_{{ final_attrs.id }}">
+                <img id="previewimage_{{ final_attrs.id }}" class="preview" src="" />
+            </a>
+        </p>
+        {% endif %}
+    {% else %}
+        <p class="preview" id="preview_{{ final_attrs.id }}" style="display: none;">
+            <a href="javascript://" target="_self" id="previewlink_{{ final_attrs.id }}">
+                <img id="previewimage_{{ final_attrs.id }}" class="preview" src="" />
+            </a>
+        </p>
+    {% endif %}
+    </div>
+
+    <div class="col-xs-9">
+        <div class="input-group">
+            <input id="{{ final_attrs.id }}" type="text" class="vFileBrowseField{% if final_attrs.class %} {{ final_attrs.class }}{% endif %}" name="{{ final_attrs.name }}" value="{{ value.path }}" readonly/>
+            <span class="input-group-btn">
+                <span
+                   onclick="FileBrowser.show($(this).parents('.input-group').find('input')[0].id, '{{ url }}?pop=1{% if final_attrs.directory %}&amp;dir={{ final_attrs.directory|urlencode|urlencode }}{% endif %}{% if final_attrs.format %}&amp;type={{ final_attrs.format }}{% endif %}');"
+                   class="fb_show btn btn-default btn-info">
+                    <span class="glyphicon glyphicon-search" title="{% trans "Change" %}"></span>
+                </span>
+            </span>
+        </div>
+        {% if value and not value.exists %}
+        <ul class="errorlist"><li>{% trans "File not found" %}</li></ul>
+        {% endif %}
+    </div>
+</div>
