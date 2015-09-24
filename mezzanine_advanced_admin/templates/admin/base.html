@@ -10,7 +10,8 @@
 
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% if LANGUAGE_BIDI %}
     <link href="{% static "bootstrap-rtl/css/bootstrap-rtl.min.css" %}" rel="stylesheet"/>
     <link href="{% static "bootstrap-rtl/css/bootstrap-flipped.min.css" %}" rel="stylesheet"/>
@@ -69,7 +70,7 @@
 
 <!-- Container -->
 <!-- Header -->
-<div class="navbar navbar-default">
+<div class="navbar navbar-default" id="header-navbar">
     <div class="navbar-inner">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-navbar-collapse">
@@ -150,7 +151,7 @@
 <!-- END Header -->
 <div class="base">
   {% render_menu %}
-  <div class="col-sm-10 right-panel">
+  <div class="col-sm-10 right-panel" id="content-wrapper">
       {% if not is_popup %}
       <div class="row">
           <div class="col-sm-12">

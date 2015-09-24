@@ -304,12 +304,25 @@ body {
 .breadcrumb {
   margin-top: 20px;
 }
-
+#content-wrapper {
+    padding-left: 274px;
+    padding-top: 64px;
+    position: relative;
+    width: 100%;
+}
+#header-navbar {
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
 /* Menu */
 .menu-fixed {
     background-color: #2B323A;
-    height: 1350px;
-    position: relative;
+    left: 0;
+    top: 60px;
+    bottom: 0;
+    position: fixed;
     padding: 0;
 }
 
