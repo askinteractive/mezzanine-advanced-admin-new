@@ -20,7 +20,7 @@ setup(
     authors=["Aymeric Bois","Xavier Amiot"],
     author_emails=["abois@askin.fr","xamiot@askin.fr"],
     name='mezzanine-advanced-admin',
-    version='0.0.1',
+    version='0.0.2',
     description='A Bootstrap theme for Django Mezzanine Admin with advanced features',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     url='https://github.com/abois/mezzanine-advanced-admin',
@@ -29,8 +29,8 @@ setup(
     classifiers=CLASSIFIERS,
     install_requires=[
         'setuptools',
-        'Mezzanine>=4.0.1'
-        'django-bootstrap3'
+        'Mezzanine>=4.0.1',
+        'django-bootstrap3',
     ],
     test_suite='mezzanine_advanced_admin.runtests.runtests',
     packages=find_packages(),

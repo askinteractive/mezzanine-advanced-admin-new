@@ -2,7 +2,6 @@
 .inline-related table th {text-align: center}
 .inline-related .add-row td {text-align: left}
 .inline-stacked .control-group.field-_order {display: none}
-.delete input {display: none}
 .field-_order .ordering {display: none} /* Hide Mezzanine's order widget */
 tr.deleted,
 .inline-related.deleted {opacity: 0.5}

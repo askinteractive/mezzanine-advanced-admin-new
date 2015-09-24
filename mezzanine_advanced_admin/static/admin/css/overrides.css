@@ -410,3 +410,6 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 .text-small {
     font-size: 0.75em;
 }
+.delete input {
+    display: none
+}
