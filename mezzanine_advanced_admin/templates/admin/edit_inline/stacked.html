@@ -170,7 +170,7 @@
 function initStackedSortable() {
     $('#{{ inline_admin_formset.formset.prefix }}-group .items').sortable({
         handle: '.drag-handler',
-        items: ".dynamic-{{ inline_admin_formset.formset.prefix }}:not(:last:visible)",
+        items: ".dynamic-{{ inline_admin_formset.formset.prefix }}",
         forcePlaceholderSize: true,
         opacity: 0.5,
         forceHelperSize: true,
