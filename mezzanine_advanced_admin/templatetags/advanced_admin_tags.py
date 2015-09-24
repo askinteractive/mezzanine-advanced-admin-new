@@ -122,6 +122,28 @@ def custom_field_rendering(context, field, *args, **kwargs):
     return field
 
 
+@register.as_tag
+def get_menus_for_page(page=None):
+    """
+    Get menus labels for page.
+    """
+    if not page:
+        return settings.PAGE_MENU_TEMPLATES
+    menus = []
+    for menu in settings.PAGE_MENU_TEMPLATES:
+        if str(menu[0]) in page.in_menus:
+            menus.append(menu[1])
+    return menus
+
+
+@register.simple_tag
+def get_content_model_for_page(page):
+    """
+    Render the page content model label.
+    """
+    return unicode(page.get_content_model()._meta.verbose_name)
+
+
 @register.inclusion_tag("admin/includes/admin_title.html", takes_context=True)
 def admin_title(context):
     title = getattr(settings, "ADVANCED_ADMIN_TITLE", _("%s - Administration" % settings.SITE_TITLE))
@@ -129,3 +151,7 @@ def admin_title(context):
     context["title"] = title
     context["logo_path"] = logo_path
     return context
+
+@register.inclusion_tag("admin/includes/menu.html", takes_context=True)
+def render_menu(context):
+    return  context
