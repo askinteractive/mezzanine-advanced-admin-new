@@ -16,6 +16,8 @@
     <link href="{% static "bootstrap-rtl/css/bootstrap-flipped.min.css" %}" rel="stylesheet"/>
     {% endif %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.css"/>
+    <link rel="stylesheet" href="{% static "plugins/jquery.dropdown/jquery.dropdown.css" %}"/>
+
 
     <script type="text/javascript">
     //<![CDATA[
@@ -42,6 +44,8 @@
     <script src="{% static "admin/js/jquery-migrate-1.2.1.min.js" %}"></script>
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "admin/js/jquery-ui.min.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.js"></script>
+    <script src="{% static "plugins/jquery.dropdown/jquery.dropdown.js" %}"></script>
 
     {% block extrahead %}{% endblock %}
 
@@ -52,6 +56,7 @@
                 $(document).ready(function() {
                     $('input[type="submit"]').addClass('btn');
                     $('[title]').tooltip();
+                    $("select").dropdown({ "autoinit" : ".select" });
                 });
             }(jQuery));
     //]]>
@@ -202,6 +207,5 @@
   </div>
   <!-- END Container -->
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.js"></script>
 </body>
 </html>
