@@ -43,7 +43,7 @@ class SortableInline(object):
 
 
 class CollapsibleInline(object):
-    start_collapsed = False
+    start_collapsed = True
 
 
 

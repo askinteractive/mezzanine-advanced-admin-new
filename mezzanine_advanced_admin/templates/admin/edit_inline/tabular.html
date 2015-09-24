@@ -98,7 +98,7 @@
                                 {% if inline_admin_form.original %}
                                 {{ inline_admin_form.deletion_field.field }}
                                 <div>
-                                    <a class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove" title="{% trans "Delete" %}"></span></a>
+                                    <a class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove-sign" title="{% trans "Delete" %}"></span></a>
                                 </div>
                                 {% endif %}
                             </td>
@@ -177,10 +177,12 @@
 
 // listener for jquery 1.7.2
 (function($) {
+
+    initDeleteRow();
+
     {% if inline_admin_formset.opts.sortable_field_name %}
 
     initSortable();
-    initDeleteRow();
 
     $("#{{ opts.model_name }}_form").submit(function(e) {
         var sortable_field_name = "{{ inline_admin_formset.opts.sortable_field_name }}",
@@ -199,7 +201,7 @@
 })(jQuery);
 
 function initSortable() {
-    $('tbody').sortable({
+    $('#{{ inline_admin_formset.formset.prefix }}-group table > tbody').sortable({
         handle: '.drag-handler',
         items: ".form-row",
         forcePlaceholderSize: true,
@@ -209,11 +211,11 @@ function initSortable() {
     });
 }
 function initDeleteRow() {
-    $('.delete .btn').on('click', function () {
+    $('#{{ inline_admin_formset.formset.prefix }}-group .delete .btn').on('click', function () {
         var $this = $(this);
         var parent = $(this).parents('.delete');
         var input = parent.find('input');
-        var rowCount = $('#id_fields-TOTAL_FORMS').val();
+        var rowCount = $('#id_{{ inline_admin_formset.formset.prefix }}-TOTAL_FORMS').val();
         if(input.length >= 1) {
             input.trigger('click');
             if(input.is(':checked')) {
@@ -227,7 +229,7 @@ function initDeleteRow() {
             parent.parent().remove();
             rowCount--;
         }
-        $('#id_fields-TOTAL_FORMS').val(rowCount)
+        $('#id_{{ inline_admin_formset.formset.prefix }}-TOTAL_FORMS').val(rowCount)
     });
 }
 </script>
