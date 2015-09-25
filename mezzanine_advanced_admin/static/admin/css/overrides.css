@@ -315,6 +315,9 @@ body {
     position: fixed;
     width: 100%;
     z-index: 100;
+    background: #ffffff none repeat scroll 0 0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    color: rgba(49, 53, 52, 0.6);
 }
 /* Menu */
 .menu-fixed {
