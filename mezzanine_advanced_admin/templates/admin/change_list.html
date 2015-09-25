@@ -45,14 +45,14 @@
 
 {% block object-tools %}
 <div id="content-navbar-collapse" class="navbar-collapse collapse">
-    <ul class="object-tools nav navbar-nav">
+    <ul class="object-tools nav pull-right">
         {% block object-tools-items %}
         {% if has_add_permission %}
         <li>
         {% url cl.opts|admin_urlname:'add' as add_url %}
-        <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-primary">
-            <span class="glyphicon glyphicon-plus"></span> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-        </a>
+            <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-fab btn-raised btn-material-blue-100" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
+                <i class="mdi-content-add"></i><span></span>
+            </a>
         </li>
         {% endif %}
         {% endblock %}

@@ -155,3 +155,15 @@ def admin_title(context):
 @register.inclusion_tag("admin/includes/menu.html", takes_context=True)
 def render_menu(context):
     return  context
+
+
+@register.filter(name='widget_type')
+def widget_type(field):
+    """
+    Template filter that returns field widget class name (in lower case).
+    E.g. if field's widget is TextInput then {{ field|widget_type }} will
+    return 'textinput'.
+    """
+    if hasattr(field, 'field') and hasattr(field.field, 'widget') and field.field.widget:
+        return field.field.widget.__class__.__name__.lower()
+    return ''
