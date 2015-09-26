@@ -208,6 +208,7 @@ td.action-checkbox {
 
 #content-main {
     clear: both;
+    padding-top: 20px;
 }
 
 @media (min-width: 768px) {
@@ -424,4 +425,7 @@ li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
 }
 .delete input {
     display: none
+}
+[class^="mdi-"], [class*="mdi-"] {
+    transform: translate(-4px, 4px) !important;
 }
