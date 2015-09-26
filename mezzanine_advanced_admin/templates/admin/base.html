@@ -9,7 +9,7 @@
     {% block extrastyle %}{% endblock %}
 
     <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}"/>
+
     {#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% if LANGUAGE_BIDI %}
@@ -24,7 +24,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css"/>
     <link rel="stylesheet" href="{% static "plugins/jquery.dropdown/jquery.dropdown.css" %}"/>
     <link rel="stylesheet" href="{% static "plugins/selectize/selectize.bootstrap3.css" %}"/>
-
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}"/>
     <script type="text/javascript">
         //<![CDATA[
         {% url "static_proxy" as static_proxy_url %}
@@ -179,7 +179,7 @@
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %} col-xs-offset-2">
             {% block navbar %}
-                <div class="navbar navbar-material-blue-400">
+                <div class="navbar navbar-material-blue-700">
                     <div class="navbar-inner">
                         {% block pretitle %}{% endblock %}
                         <div class="navbar-header">
