@@ -324,6 +324,8 @@ body {
     bottom: 0;
     position: fixed;
     padding: 0;
+    z-index: 1000;
+    font-size: 12px;
 }
 
 .menu-fixed .navbar-brand span {
@@ -352,10 +354,44 @@ body {
     margin-left:20px;
     padding: 12px 0px;
     display: block;
+    font-size: 12px;
 }
 
 .menu-fixed li a:hover {
   text-decoration: none;
+}
+
+.menu-fixed ul ul {
+    padding-left: 20px;
+    margin: -20px 0 20px 0;
+}
+.menu-fixed ul ul li {
+    position: relative;
+}
+.menu-fixed ul ul li {
+    border-left: 1px dashed rgba(255,255,255, 0.3);
+    margin-left: 10px;
+}
+.menu-fixed ul ul li::before {
+    border-bottom: 1px dashed rgba(255,255,255, 0.3);
+    content: "";
+    display: block;
+    width: 15px;
+    bottom: 20px;
+    position: absolute;
+}
+.menu-fixed ul ul li a {
+    padding-left: 5px;
+}
+.menu-fixed ul ul li a::before {
+    border-bottom: 1px dashed rgba(12, 12, 12, 0.3);
+    content: "";
+    display: block;
+    left: 30px;
+    position: absolute;
+    top: 15px;
+    width: 21px;
+    z-index: 1;
 }
 
 .right-panel h2 a {

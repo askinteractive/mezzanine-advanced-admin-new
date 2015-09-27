@@ -1,9 +1,35 @@
 {% load i18n advanced_admin_tags %}
 
+{% comment %}
 <ul>
   <li><a href="#"><i class="material-icons">dashboard</i><span class="hidden-xs">&nbsp; Dashboard</span></a></li>
   <li><a href="#"><i class="material-icons">perm_contact_calendar</i><span class="hidden-xs">&nbsp; Blog</span></a></li>
   <li><a href="#"><i class="material-icons">description</i><span class="hidden-xs">&nbsp; Content</span></a></li>
   <li><a href="#"><i class="material-icons">group</i><span class="hidden-xs">&nbsp; Users</span></a></li>
   <li><a href="#"><i class="material-icons">settings</i><span class="hidden-xs">&nbsp; Settings</span></a></li>
+</ul>
+{% endcomment %}
+
+<ul>
+    {% for app in dropdown_menu_app_list %}
+    <li>
+        <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="false" role="button">
+            {% if app.icon %}
+            <i class="{{ app.icon }}"></i>
+            {% endif %}
+            {% trans app.name %}
+        </a>
+        <ul class="dropdown-menu-menu collapse" id="menu-{{ app.name|slugify }}">
+        {% for model in app.models %}
+            {% if model.perms.add or model.perms.change or model.perms.custom %}
+            <li{% if forloop.first %} class="first"{% endif %}>
+                <a href="{{ model.admin_url }}{% if not model.perms.change and not model.perms.custom %}add/{% endif %}">
+                    {{ model.name }}
+                </a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
 </ul>
