@@ -1,23 +1,21 @@
 {% load i18n advanced_admin_tags %}
 
-{% comment %}
-<ul>
-  <li><a href="#"><i class="material-icons">dashboard</i><span class="hidden-xs">&nbsp; Dashboard</span></a></li>
-  <li><a href="#"><i class="material-icons">perm_contact_calendar</i><span class="hidden-xs">&nbsp; Blog</span></a></li>
-  <li><a href="#"><i class="material-icons">description</i><span class="hidden-xs">&nbsp; Content</span></a></li>
-  <li><a href="#"><i class="material-icons">group</i><span class="hidden-xs">&nbsp; Users</span></a></li>
-  <li><a href="#"><i class="material-icons">settings</i><span class="hidden-xs">&nbsp; Settings</span></a></li>
-</ul>
-{% endcomment %}
-
 <ul>
     {% for app in dropdown_menu_app_list %}
+    {% if app.name == "Dashboard" %}
+    <li>
+        <a href="{% url "admin:index" %}">
+            <i class="{{ app.icon }}"></i>
+            <span class="hidden-xs">{% trans "Dashboard" %}</span>
+        </a>
+    </li>
+    {% else %}
     <li>
         <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="false" role="button">
             {% if app.icon %}
             <i class="{{ app.icon }}"></i>
             {% endif %}
-            {% trans app.name %}
+            <span class="hidden-xs">{% trans app.name %}</span>
         </a>
         <ul class="dropdown-menu-menu collapse" id="menu-{{ app.name|slugify }}">
         {% for model in app.models %}
@@ -31,5 +29,6 @@
         {% endfor %}
         </ul>
     </li>
+    {% endif %}
     {% endfor %}
 </ul>

@@ -173,19 +173,14 @@ def render_menu(context):
     # Model or view --> (group index, group title, item index, item title).
     menu_order = {}
     for (group_index, group) in enumerate(settings.ADMIN_MENU_ORDER):
-        if len(group) == 3:
-            group_title, items, group_icon = group
-        else:
-            group_title, items = group
-            group_icon = None
+        group_title, items = group
         group_title = group_title.title()
         for (item_index, item) in enumerate(items):
             if isinstance(item, (tuple, list)):
                 item_title, item = item
             else:
                 item_title = None
-            menu_order[item] = (group_index, group_title, group_icon,
-                                item_index, item_title)
+            menu_order[item] = (group_index, group_title, item_index, item_title)
 
     # Add all registered models, using group and title from menu order.
     for (model, model_admin) in admin.site._registry.items():
@@ -207,12 +202,11 @@ def render_menu(context):
             if admin_url_name:
                 model_label = "%s.%s" % (opts.app_label, opts.object_name)
                 try:
-                    app_index, app_title, app_icon, model_index, model_title = \
+                    app_index, app_title, model_index, model_title = \
                         menu_order[model_label]
                 except KeyError:
                     app_index = None
                     app_title = opts.app_config.verbose_name.title()
-                    app_icon = None
                     model_index = None
                     model_title = None
                 else:
@@ -222,10 +216,15 @@ def render_menu(context):
                     model_title = capfirst(model._meta.verbose_name_plural)
 
                 if app_title not in app_dict:
+                    app_icon = None
+                    try:
+                        app_icon = settings.ADVANCED_ADMIN_MENU_ICONS[app_title]
+                    except:
+                        pass
                     app_dict[app_title] = {
                         "index": app_index,
                         "name": app_title,
-                        "icon": app_icon,
+                        "icon":app_icon,
                         "models": [],
                     }
                 app_dict[app_title]["models"].append({
@@ -238,7 +237,7 @@ def render_menu(context):
 
     # Menu may also contain view or url pattern names given as (title, name).
     for (item_url, item) in menu_order.items():
-        app_index, app_title, app_icon, item_index, item_title = item
+        app_index, app_title, item_index, item_title = item
         try:
             item_url = reverse(item_url)
         except NoReverseMatch:
@@ -261,6 +260,12 @@ def render_menu(context):
     for app in app_list:
         app["models"].sort(key=sort)
     app_list.sort(key=sort)
+
+    # Add dashboard into list
+    app_list.insert(0, {
+        "icon": settings.ADVANCED_ADMIN_MENU_ICONS["Dashboard"],
+        "name": "Dashboard"
+    })
 
     user = context["request"].user
     context["dropdown_menu_app_list"] = app_list

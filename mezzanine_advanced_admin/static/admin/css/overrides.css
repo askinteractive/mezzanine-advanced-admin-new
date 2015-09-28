@@ -393,6 +393,17 @@ body {
     width: 21px;
     z-index: 1;
 }
+.menu-fixed i {
+    border-radius: 999px;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s linear 0s;
+    text-align: center;
+    padding-top: 6px;
+}
+.menu-fixed li:hover i {
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
 .right-panel h2 a {
   color: #555;
