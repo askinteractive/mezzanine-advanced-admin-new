@@ -227,8 +227,18 @@ def render_menu(context):
                         "icon":app_icon,
                         "models": [],
                     }
-                is_active = (request.path in (change_url, add_url)
-                             or request.path.startswith(change_url) if change_url else False)
+
+                is_active = False
+                # Specific rules
+                if "pages/page" in change_url and "/pages/" in request.path:
+                    is_active = True
+                elif "/filebrowser/filebrowser/" in change_url:
+                    change_url = change_url.replace("filebrowser/filebrowser", "media-library/browse")
+                    if "/media-library/" in request.path:
+                        is_active = True
+                if not is_active:
+                    is_active = (request.path in (change_url, add_url)
+                                 or request.path.startswith(change_url) if change_url else False)
                 app_dict[app_title]["models"].append({
                     "index": model_index,
                     "perms": model_admin.get_model_perms(request),
