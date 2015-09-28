@@ -1,6 +1,6 @@
 {% load i18n advanced_admin_tags %}
 
-<ul>
+<ul id="left-menu" aria-multiselectable="true" role="tab">
     {% for app in dropdown_menu_app_list %}
         {% if app.name == "Dashboard" %}
         <li{% if app.is_active %} class="active"{% endif %}>
@@ -11,16 +11,16 @@
         </li>
         {% else %}
         <li{% if app.is_active %} class="active"{% endif %}>
-            <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="false" role="button">
+            <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="{{ app.is_active|default:"false"|lower }}" role="button" data-parent="#left-menu">
                 {% if app.icon %}
                 <i class="{{ app.icon }}"></i>
                 {% endif %}
                 <span class="hidden-xs">{% trans app.name %}</span>
             </a>
-            <ul class="dropdown-menu-menu collapse{% if app.is_active %} in{% endif %}" id="menu-{{ app.name|slugify }}">
+            <ul class="dropdown-menu-menu collapse{% if app.is_active %} in{% endif %}" id="menu-{{ app.name|slugify }}" role="tabpanel">
             {% for model in app.models %}
                 {% if model.perms.add or model.perms.change or model.perms.custom %}
-                <li{% if forloop.first %} class="first"{% endif %}>
+                <li class="{% if forloop.first %}first{% endif %}{% if model.is_active %} active{% endif %}">
                     <a href="{{ model.admin_url }}{% if not model.perms.change and not model.perms.custom %}add/{% endif %}">
                         {{ model.name }}
                     </a>

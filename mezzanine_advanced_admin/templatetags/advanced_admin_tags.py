@@ -227,14 +227,16 @@ def render_menu(context):
                         "icon":app_icon,
                         "models": [],
                     }
+                is_active = (request.path in (change_url, add_url)
+                             or request.path.startswith(change_url) if change_url else False)
                 app_dict[app_title]["models"].append({
                     "index": model_index,
                     "perms": model_admin.get_model_perms(request),
                     "name": model_title,
                     "admin_url": change_url,
                     "add_url": add_url,
+                    "is_active": is_active
                 })
-                is_active = request.path in (change_url, add_url) or request.path.startswith(change_url) if change_url else False
                 if is_active:
                     app_dict[app_title]["is_active"] = is_active
 
