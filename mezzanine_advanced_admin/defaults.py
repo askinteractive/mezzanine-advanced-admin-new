@@ -30,10 +30,3 @@ register_setting(
         "Dashboard": "mdi-action-dashboard"
     }
 )
-register_setting(
-    name="ADVANCED_ADMIN_MENU_DASHBOARD_ICON",
-    description=_("Icon for dashboard menu"
-                  "See http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html#icon"),
-    editable=True,
-    default="mdi-action-dashboard"
-)

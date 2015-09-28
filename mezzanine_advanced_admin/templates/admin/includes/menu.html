@@ -2,33 +2,33 @@
 
 <ul>
     {% for app in dropdown_menu_app_list %}
-    {% if app.name == "Dashboard" %}
-    <li>
-        <a href="{% url "admin:index" %}">
-            <i class="{{ app.icon }}"></i>
-            <span class="hidden-xs">{% trans "Dashboard" %}</span>
-        </a>
-    </li>
-    {% else %}
-    <li>
-        <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="false" role="button">
-            {% if app.icon %}
-            <i class="{{ app.icon }}"></i>
-            {% endif %}
-            <span class="hidden-xs">{% trans app.name %}</span>
-        </a>
-        <ul class="dropdown-menu-menu collapse" id="menu-{{ app.name|slugify }}">
-        {% for model in app.models %}
-            {% if model.perms.add or model.perms.change or model.perms.custom %}
-            <li{% if forloop.first %} class="first"{% endif %}>
-                <a href="{{ model.admin_url }}{% if not model.perms.change and not model.perms.custom %}add/{% endif %}">
-                    {{ model.name }}
-                </a>
-            </li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    </li>
-    {% endif %}
+        {% if app.name == "Dashboard" %}
+        <li{% if app.is_active %} class="active"{% endif %}>
+            <a href="{% url "admin:index" %}">
+                <i class="{{ app.icon }}"></i>
+                <span class="hidden-xs">{% trans "Dashboard" %}</span>
+            </a>
+        </li>
+        {% else %}
+        <li{% if app.is_active %} class="active"{% endif %}>
+            <a href="#menu-{{ app.name|slugify }}" data-toggle="collapse" aria-expanded="false" role="button">
+                {% if app.icon %}
+                <i class="{{ app.icon }}"></i>
+                {% endif %}
+                <span class="hidden-xs">{% trans app.name %}</span>
+            </a>
+            <ul class="dropdown-menu-menu collapse" id="menu-{{ app.name|slugify }}">
+            {% for model in app.models %}
+                {% if model.perms.add or model.perms.change or model.perms.custom %}
+                <li{% if forloop.first %} class="first"{% endif %}>
+                    <a href="{{ model.admin_url }}{% if not model.perms.change and not model.perms.custom %}add/{% endif %}">
+                        {{ model.name }}
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
     {% endfor %}
 </ul>

@@ -232,8 +232,11 @@ def render_menu(context):
                     "perms": model_admin.get_model_perms(request),
                     "name": model_title,
                     "admin_url": change_url,
-                    "add_url": add_url
+                    "add_url": add_url,
                 })
+                is_active = request.path in (change_url, add_url)
+                if is_active:
+                    app_dict[app_title]["is_active"] = is_active
 
     # Menu may also contain view or url pattern names given as (title, name).
     for (item_url, item) in menu_order.items():
@@ -264,7 +267,8 @@ def render_menu(context):
     # Add dashboard into list
     app_list.insert(0, {
         "icon": settings.ADVANCED_ADMIN_MENU_ICONS["Dashboard"],
-        "name": "Dashboard"
+        "name": "Dashboard",
+        "is_active": reverse("admin:index") == request.path
     })
 
     user = context["request"].user
