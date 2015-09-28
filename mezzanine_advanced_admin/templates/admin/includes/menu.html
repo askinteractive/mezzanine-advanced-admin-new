@@ -17,7 +17,7 @@
                 {% endif %}
                 <span class="hidden-xs">{% trans app.name %}</span>
             </a>
-            <ul class="dropdown-menu-menu collapse" id="menu-{{ app.name|slugify }}">
+            <ul class="dropdown-menu-menu collapse{% if app.is_active %} in{% endif %}" id="menu-{{ app.name|slugify }}">
             {% for model in app.models %}
                 {% if model.perms.add or model.perms.change or model.perms.custom %}
                 <li{% if forloop.first %} class="first"{% endif %}>
