@@ -16,15 +16,12 @@
         <link href="{% static "bootstrap-rtl/css/bootstrap-rtl.min.css" %}" rel="stylesheet"/>
         <link href="{% static "bootstrap-rtl/css/bootstrap-flipped.min.css" %}" rel="stylesheet"/>
     {% endif %}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
-    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/fonts/Material-Design-Icons.woff">#}
-    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css">#}
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/material-fullpalette.min.css"/>
     <link rel="stylesheet" href="{% static "plugins/jquery.dropdown/jquery.dropdown.css" %}"/>
     <link rel="stylesheet" href="{% static "plugins/selectize/selectize.bootstrap3.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}"/>
+{#    <link rel="stylesheet" type="text/css" href="{% static "admin/custom-scrollbar/jquery.custom-scrollbar.css" %}"/>#}
     <script type="text/javascript">
         //<![CDATA[
         {% url "static_proxy" as static_proxy_url %}
@@ -51,8 +48,9 @@
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "admin/js/jquery-ui.min.js" %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.js"></script>
-    <script src="{% static "plugins/jquery.dropdown/jquery.dropdown.js" %}"></script>
-    <script src="{% static "plugins/selectize/selectize.min.js" %}"></script>
+{#    <script src="{% static "plugins/jquery.dropdown/jquery.dropdown.js" %}"></script>#}
+{#    <script src="{% static "plugins/selectize/selectize.min.js" %}"></script>#}
+{#    <script src="{% static "admin/custom-scrollbar/jquery.custom-scrollbar.js" %}"></script>#}
 
     {% block extrahead %}{% endblock %}
 
