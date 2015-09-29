@@ -478,6 +478,12 @@ body {
 #tree .delete {
     box-shadow: none;
 }
+#tree .page-status-1>div {/* Draft page */
+    background-color: #f1f1f1;
+}
+#tree .toggle-draft {
+    margin-right: 20px;
+}
 /*li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {*/
     /*border-color: #999;*/
 /*}*/

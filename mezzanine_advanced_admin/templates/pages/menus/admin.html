@@ -2,7 +2,7 @@
 
 <ol>
     {% for page in page_branch %}
-    <li id="ordering_{{ page.id }}" class="page" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% if not forloop.last %} {% endif %}{% endfor %}">
+    <li id="ordering_{{ page.id }}" class="page page-status-{{ page.status }}" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% if not forloop.last %} {% endif %}{% endfor %}" data-page-id="{{ page.id }}">
         <div>
             <div class="page-title pull-left">
                 <span class="tree-toggle" id="page-{{ page.id }}">
@@ -26,9 +26,9 @@
             <div class="pull-right" role="group">
 
                 <!-- Draft / publish -->
-                <span class="togglebutton togglebutton-material-blue-700">
+                <span class="togglebutton togglebutton-material-blue-700 toggle-draft">
                     <label>
-                        {{ page.get_status_display }}
+                        <span class="page-status">{{ page.get_status_display }}</span>
                         <input type="checkbox"{% if page.status > 1 %} checked{% endif %}>
                         <span class="toggle"></span>
                     </label>

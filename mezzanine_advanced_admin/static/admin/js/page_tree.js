@@ -120,10 +120,24 @@ jQuery(document).ready(function($) {
         startCollapsed: true
     });
 
+    /* Menu filter */
     filterMenu($('#menu-filter input:checked').val());
 
     $('#menu-filter input').on('change', function () {
         filterMenu($(this).val());
+    });
+
+    /* Toggle draft - publish */
+    $('.toggle-draft input').on('change', function () {
+        var $this = $(this);
+        var args = {
+            id: $this.parents("[id^=ordering_]").data('page-id'),
+            csrfmiddlewaretoken: window.__csrf_token
+        };
+
+        $.post(window.__page_update_status_url, args, function(pageStatus) {
+            $this.parent().find('.page-status').text(pageStatus);
+        });
     });
 
 });
