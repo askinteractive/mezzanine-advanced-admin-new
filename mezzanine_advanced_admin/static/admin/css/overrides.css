@@ -208,6 +208,7 @@ td.action-checkbox {
 
 #content-main {
     clear: both;
+    padding-top: 20px;
 }
 
 @media (min-width: 768px) {
@@ -323,38 +324,97 @@ body {
     bottom: 0;
     position: fixed;
     padding: 0;
+    z-index: 1000;
+    font-size: 12px;
+    overflow-y: scroll;
 }
 
 .menu-fixed .navbar-brand span {
   display: none;
 }
-
-.menu-fixed ul {
-  padding: 0;
+.menu-fixed>ul {
+    padding: 0;
 }
 
 .menu-fixed li {
     list-style: none;
 }
 
-.menu-fixed li:hover {
+.menu-fixed ul ul li:hover {
     background-color: #313942;
     color:#3f3f3f;
 }
 
-.menu-fixed li:first-child {
-  margin-top: 20px
+.menu-fixed>ul>li {
+    margin-top: 0px
 }
-
-.menu-fixed li a  {
+/*.menu-fixed>ul>li li.active {*/
+    /*background-color: rgba(12, 12, 12, 0.3);*/
+/*}*/
+.menu-fixed>ul>li li:first-child {
+    margin-top: 20px;
+}
+.menu-fixed>ul>li>a {
+    padding: 5px 0;
+}
+.menu-fixed li a {
     color:#CCC;
     margin-left:20px;
     padding: 12px 0px;
     display: block;
+    font-size: 12px;
+    text-decoration: none;
 }
 
 .menu-fixed li a:hover {
   text-decoration: none;
+}
+
+.menu-fixed ul ul {
+    padding-left: 20px;
+    margin: -20px 0 20px 0;
+}
+.menu-fixed ul ul li {
+    position: relative;
+    height: 30px;
+    margin-left: 10px;
+}
+.menu-fixed ul ul li::before {
+    border-left: 1px dashed rgba(255,255,255, 0.3);
+    content: "";
+    display: block;
+    height: 30px;
+    bottom: 10px;
+    left: 5px;
+    position: absolute;
+}
+.menu-fixed ul ul li a {
+    padding-left: 10px;
+}
+.menu-fixed ul ul li a::before {
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+    content: "";
+    display: block;
+    left: 5px;
+    position: absolute;
+    top: 20px;
+    width: 15px;
+    z-index: 1;
+}
+.menu-fixed i {
+    border-radius: 999px;
+    height: 40px;
+    width: 40px;
+    transition: all 0.15s linear 0s;
+    text-align: center;
+    padding-top: 7px;
+    color: #1976d2;
+}
+.menu-fixed li:hover i {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.menu-fixed li.active i {
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .right-panel h2 a {
@@ -437,4 +497,7 @@ a {
 .navbar-header {
   margin-top: 10px;
 }
-.
+
+[class^="mdi-"], [class*="mdi-"] {
+    transform: translate(-4px, 4px) !important;
+}

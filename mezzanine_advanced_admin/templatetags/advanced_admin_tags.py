@@ -1,10 +1,16 @@
 from importlib import import_module
+from django.contrib import admin
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse, NoReverseMatch
+from django.template.defaultfilters import capfirst
 
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 from mezzanine import template
 from mezzanine.conf import settings
-
+from mezzanine.core.templatetags.mezzanine_tags import admin_app_list
+from mezzanine.utils.sites import current_site_id
+from mezzanine.utils.urls import admin_url
 
 register = template.Library()
 
@@ -154,7 +160,139 @@ def admin_title(context):
 
 @register.inclusion_tag("admin/includes/menu.html", takes_context=True)
 def render_menu(context):
-    return  context
+    """
+    Adopted from ``django.contrib.admin.sites.AdminSite.index``.
+    Returns a list of lists of models grouped and ordered according to
+    ``mezzanine.conf.ADMIN_MENU_ORDER``. Called from the
+    ``admin_dropdown_menu`` template tag as well as the ``app_list``
+    dashboard widget.
+    """
+    request = context["request"]
+    app_dict = {}
+
+    # Model or view --> (group index, group title, item index, item title).
+    menu_order = {}
+    for (group_index, group) in enumerate(settings.ADMIN_MENU_ORDER):
+        group_title, items = group
+        group_title = group_title.title()
+        for (item_index, item) in enumerate(items):
+            if isinstance(item, (tuple, list)):
+                item_title, item = item
+            else:
+                item_title = None
+            menu_order[item] = (group_index, group_title, item_index, item_title)
+
+    # Add all registered models, using group and title from menu order.
+    for (model, model_admin) in admin.site._registry.items():
+        opts = model._meta
+        in_menu = not hasattr(model_admin, "in_menu") or model_admin.in_menu()
+        if in_menu and request.user.has_module_perms(opts.app_label):
+            perms = model_admin.get_model_perms(request)
+            admin_url_name = ""
+            if perms["change"]:
+                admin_url_name = "changelist"
+                change_url = admin_url(model, admin_url_name)
+            else:
+                change_url = None
+            if perms["add"]:
+                admin_url_name = "add"
+                add_url = admin_url(model, admin_url_name)
+            else:
+                add_url = None
+            if admin_url_name:
+                model_label = "%s.%s" % (opts.app_label, opts.object_name)
+                try:
+                    app_index, app_title, model_index, model_title = \
+                        menu_order[model_label]
+                except KeyError:
+                    app_index = None
+                    app_title = opts.app_config.verbose_name.title()
+                    model_index = None
+                    model_title = None
+                else:
+                    del menu_order[model_label]
+
+                if not model_title:
+                    model_title = capfirst(model._meta.verbose_name_plural)
+
+                if app_title not in app_dict:
+                    app_icon = None
+                    try:
+                        app_icon = settings.ADVANCED_ADMIN_MENU_ICONS[app_title]
+                    except:
+                        pass
+                    app_dict[app_title] = {
+                        "index": app_index,
+                        "name": app_title,
+                        "icon":app_icon,
+                        "models": [],
+                    }
+
+                is_active = False
+                # Specific rules
+                if "pages/page" in change_url and "/pages/" in request.path:
+                    is_active = True
+                elif "/filebrowser/filebrowser/" in change_url:
+                    change_url = change_url.replace("filebrowser/filebrowser", "media-library/browse")
+                    if "/media-library/" in request.path:
+                        is_active = True
+                if not is_active:
+                    is_active = (request.path in (change_url, add_url)
+                                 or request.path.startswith(change_url) if change_url else False)
+                app_dict[app_title]["models"].append({
+                    "index": model_index,
+                    "perms": model_admin.get_model_perms(request),
+                    "name": model_title,
+                    "admin_url": change_url,
+                    "add_url": add_url,
+                    "is_active": is_active
+                })
+                if is_active:
+                    app_dict[app_title]["is_active"] = is_active
+
+    # Menu may also contain view or url pattern names given as (title, name).
+    for (item_url, item) in menu_order.items():
+        app_index, app_title, item_index, item_title = item
+        try:
+            item_url = reverse(item_url)
+        except NoReverseMatch:
+            continue
+        if app_title not in app_dict:
+            app_dict[app_title] = {
+                "index": app_index,
+                "name": app_title,
+                "models": [],
+            }
+        app_dict[app_title]["models"].append({
+            "index": item_index,
+            "perms": {"custom": True},
+            "name": item_title,
+            "admin_url": item_url,
+        })
+
+    app_list = list(app_dict.values())
+    sort = lambda x: (x["index"] if x["index"] is not None else 999, x["name"])
+    for app in app_list:
+        app["models"].sort(key=sort)
+    app_list.sort(key=sort)
+
+    # Add dashboard into list
+    app_list.insert(0, {
+        "icon": settings.ADVANCED_ADMIN_MENU_ICONS["Dashboard"],
+        "name": "Dashboard",
+        "is_active": reverse("admin:index") == request.path
+    })
+
+    user = context["request"].user
+    context["dropdown_menu_app_list"] = app_list
+    if user.is_superuser:
+        sites = Site.objects.all()
+    else:
+        sites = user.sitepermissions.sites.all()
+    context["dropdown_menu_sites"] = list(sites)
+    context["dropdown_menu_selected_site_id"] = current_site_id()
+
+    return context
 
 
 @register.filter(name='widget_type')

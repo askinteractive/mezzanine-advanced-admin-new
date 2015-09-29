@@ -1,0 +1,152 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n staticfiles advanced_admin_tags %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' packages="mezzanine.forms" %}"></script>
+<script src="{% static "mezzanine/js/admin/form_entries.js" %}"></script>
+{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+     <li><a href="../../../../">{% trans "Home" %}</a></li>
+     <li><a href="../../../">{{ opts.app_label|capfirst|escape }}</a></li>
+     <li><a href="../../">{{ opts.verbose_name_plural|capfirst }}</a></li>
+     <li><a href="../">{{ original|truncatewords:"18" }}</a></li>
+     <li>{{ title }}</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <form method="post" class="table-responsive">
+    {% csrf_token %}
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>{% trans "Field" %}</th>
+                <th>{% trans "Include" %}</th>
+                <th>{% trans "Filter by" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for include_field, filter_field, filter_option_fields in entries_form %}
+            <tr class="{% cycle on,off as row %}">
+                <td class="field">{{ include_field.label_tag }}</td>
+                <td class="include">
+                    <div class="checkbox checkbox-material-blue-700">
+                        {{ include_field }}
+                        <span class="checkbox-material">
+                            <span class="check"></span>
+                        </span>
+                    </div>
+                </td>
+                <td class="filter row">
+                    <div class="col-xs-2">
+                        {% dab_field_rendering filter_field size="small"%}
+                    </div>
+                    <div class="options-div col-xs-10">
+                        {% for option_field in filter_option_fields %}
+                                <label for="{{ option_field.auto_id }}">
+                                    {{ option_field.label }}
+                                </label>
+                                {{ option_field }}
+                        {% endfor %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr class="{% cycle row %}">
+                <td class="field">
+                    <label for="include-all">{% trans "All" %}</label>
+                </td>
+                <td class="include-all">
+                    <div class="checkbox checkbox-material-blue-700">
+                        <label for="include-all">
+                            <input type="checkbox" id="include-all" class="include-all" checked="checked" />
+                            <span class="checkbox-material">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" name="back" class="btn pull-left"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</button>
+    <button type="submit" class="btn btn-material-blue-400 pull-right" name="export"><i class="mdi-file-file-download"></i>{% trans "Export CSV" %}</button>
+    <button type="submit" class="btn btn-material-blue-700 pull-right"><i class="mdi-action-view-list"></i>{% trans "View entries" %}</button>
+    <div class="clearfix"></div>
+
+    {% if submitted %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 id="entries-title">{% trans "Entries" %}</h2>
+        </div>
+        <div class="panel-body table-responsive">
+            {% for row in entries_form.rows %}
+            {% if forloop.first %}
+            <table class="table table-striped table-bordered">
+                <tr>
+                    {% if can_delete_entries %}
+                    <th>
+                        <div class="checkbox checkbox-material-blue-700">
+                            <label>
+                                <input type="checkbox" class="include-all">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </th>
+                    {% endif %}
+                    {% for column in entries_form.columns %}
+                    <th{% if forloop.last %} class="last"{% endif %}>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            {% endif %}
+                <tr class="{% cycle on,off %}">
+                    {% if can_delete_entries %}
+                    <td class="include">
+                        <div class="checkbox checkbox-material-blue-700">
+                            <label>
+                                <input type="checkbox" name="selected" value="{{ row.0 }}">
+                                <span class="checkbox-material">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </td>
+                    {% endif %}
+                    {% for field in row %}
+                    {% if not forloop.first %}
+                    <td{% if forloop.last %} class="last"{% endif %}>{{ field }}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            {% if forloop.last %}
+            </table>
+            <!--
+            count is injected into the title here with the :after selector
+            to avoid calling the expensive "entries_form.rows" twice.
+            -->
+            <style>#entries-title:after {content: ' ({{ forloop.counter }})';}</style>
+
+
+            {% endif %}
+            {% empty %}
+            <p class="empty">{% trans "No entries to display" %}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% if can_delete_entries %}
+    <button type="submit" name="back" class="btn pull-left"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</button>
+    <button type="submit" name="delete" class="btn btn-material-red-400 pull-right">{% trans "Delete selected" %}</button>
+    {% endif %}
+    {% endif %}
+    </form>
+</div>
+{% endblock %}
