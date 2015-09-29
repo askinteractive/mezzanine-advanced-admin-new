@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="{% static "plugins/jquery.dropdown/jquery.dropdown.css" %}"/>
     <link rel="stylesheet" href="{% static "plugins/selectize/selectize.bootstrap3.css" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/overrides.css" %}"/>
-{#    <link rel="stylesheet" type="text/css" href="{% static "admin/custom-scrollbar/jquery.custom-scrollbar.css" %}"/>#}
+{#    <link rel="stylesheet" type="text/css" href="{% static "plugins/custom-scrollbar/jquery.custom-scrollbar.css" %}"/>#}
     <script type="text/javascript">
         //<![CDATA[
         {% url "static_proxy" as static_proxy_url %}
@@ -50,7 +50,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.js"></script>
 {#    <script src="{% static "plugins/jquery.dropdown/jquery.dropdown.js" %}"></script>#}
 {#    <script src="{% static "plugins/selectize/selectize.min.js" %}"></script>#}
-{#    <script src="{% static "admin/custom-scrollbar/jquery.custom-scrollbar.js" %}"></script>#}
+{#    <script src="{% static "plugins/custom-scrollbar/jquery.custom-scrollbar.js" %}"></script>#}
 
     {% block extrahead %}{% endblock %}
 
@@ -207,7 +207,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             {% for message in messages %}
-                                <div class="alert {{ message.tags|default:"alert-info" }}">
+                                <div class="alert alert-{{ message.tags|default:"alert-info" }} alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
                                     {{ message|capfirst }}
                                 </div>
                             {% endfor %}

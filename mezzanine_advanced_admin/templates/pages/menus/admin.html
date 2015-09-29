@@ -2,7 +2,7 @@
 
 <ol>
     {% for page in page_branch %}
-    <li id="ordering_{{ page.id }}" class="page" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% endfor %}">
+    <li id="ordering_{{ page.id }}" class="page page-status-{{ page.status }}" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% if not forloop.last %} {% endif %}{% endfor %}" data-page-id="{{ page.id }}">
         <div>
             <div class="page-title pull-left">
                 <span class="tree-toggle" id="page-{{ page.id }}">
@@ -24,9 +24,19 @@
             </div>
 
             <div class="pull-right" role="group">
+
+                <!-- Draft / publish -->
+                <span class="togglebutton togglebutton-material-blue-700 toggle-draft">
+                    <label>
+                        <span class="page-status">{{ page.get_status_display }}</span>
+                        <input type="checkbox"{% if page.status > 1 %} checked{% endif %}>
+                        <span class="toggle"></span>
+                    </label>
+                </span>
+
                 {% if page.perms.add %}
                 <div class="btn-group" role="group">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="addpage-{{ page.id }}" data-toggle="dropdown" aria-haspopup="true">
+                    <button class="btn btn-material-blue-grey-50 dropdown-toggle" type="button" id="addpage-{{ page.id }}" data-toggle="dropdown" aria-haspopup="true">
                         {% trans "Add" %} ...
                         <span class="caret"></span>
                     </button>

@@ -478,6 +478,12 @@ body {
 #tree .delete {
     box-shadow: none;
 }
+/*#tree .page-status-1>div {/!* Draft page *!/*/
+    /*background-color: #f1f1f1;*/
+/*}*/
+#tree .toggle-draft {
+    margin-right: 20px;
+}
 /*li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {*/
     /*border-color: #999;*/
 /*}*/
@@ -509,6 +515,10 @@ body {
 
 a {
   color: #1976d2;
+}
+a:active,
+a:hover {
+  color:  #42a5f5 !important;
 }
 
 .navbar-header {

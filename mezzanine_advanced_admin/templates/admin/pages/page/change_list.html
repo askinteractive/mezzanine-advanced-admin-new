@@ -3,7 +3,10 @@
 
 {% block extrahead %}
     {{ block.super }}
-    <script>window.__page_ordering_url = '{% url "admin_page_ordering" %}';</script>
+    <script>
+    window.__page_ordering_url = '{% url "admin_page_ordering" %}';
+    window.__page_update_status_url = '{% url "admin_page_update_status" %}';
+    </script>
     {#<script src="{% static "admin/js/jquery-sortable.js" %}"></script>#}
     <script src="{% static "admin/js/jquery-ui-1.10.4.custom.min.js" %}"></script>
     <script src="{% static "admin/js/jquery.nestedSortable.js" %}"></script>
@@ -21,7 +24,7 @@
             <p>{% trans "Filter by menu" %} ...</p>
             <div class="radio radio-material-blue-700">
                 <label>
-                    <input type="radio" value="all-menus" name="menu_filter">
+                    <input type="radio" value="all-menus" name="menu_filter" checked>
                     <span class="circle"></span>
                     <span class="check"></span>
                     {% trans "All" %}
