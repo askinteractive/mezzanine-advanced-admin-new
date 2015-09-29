@@ -120,10 +120,15 @@ jQuery(document).ready(function($) {
         startCollapsed: true
     });
 
+    filterMenu($('#menu-filter input:checked').val());
+
     $('#menu-filter input').on('change', function () {
-        console.log($('.page').css('opacity', '0.4'));
-        $('.page').css('opacity', '0.4');
-        $('[data-menus~=' + $(this).val() + ']').css('opacity', '1');
+        filterMenu($(this).val());
     });
 
 });
+
+function filterMenu(menu) {
+    $('.page').css('opacity', '0.4');
+    $('[data-menus~=' + menu + ']').css('opacity', '1');
+}

@@ -2,7 +2,7 @@
 
 <ol>
     {% for page in page_branch %}
-    <li id="ordering_{{ page.id }}" class="page" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% endfor %}">
+    <li id="ordering_{{ page.id }}" class="page" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% if not forloop.last %} {% endif %}{% endfor %}">
         <div>
             <div class="page-title pull-left">
                 <span class="tree-toggle" id="page-{{ page.id }}">
