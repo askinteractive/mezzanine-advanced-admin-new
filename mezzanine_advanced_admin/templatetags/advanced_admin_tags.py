@@ -230,7 +230,7 @@ def render_menu(context):
 
                 is_active = False
                 # Specific rules
-                if "pages/page" in change_url and "/pages/" in request.path:
+                if "pages/page" in change_url and ("/pages/" in request.path or "/forms/" in request.path):
                     is_active = True
                 elif "/filebrowser/filebrowser/" in change_url:
                     change_url = change_url.replace("filebrowser/filebrowser", "media-library/browse")
