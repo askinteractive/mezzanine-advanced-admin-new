@@ -2,26 +2,28 @@
 
 <ol>
     {% for page in page_branch %}
-    <li id="ordering_{{ page.id }}" class="page" data-menus="all {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% if not forloop.last %} {% endif %}{% endfor %}">
+    <li id="ordering_{{ page.id }}" class="page" data-menus="all-menus {% get_menus_for_page page as menus %}{% for menu in menus %}{{ menu|slugify }}{% endfor %}">
         <div>
-            <span class="tree-toggle" id="page-{{ page.id }}">
-                <span class="btn-link">
-                    <span class="icon tree-open glyphicon glyphicon-plus-sign"></span>
-                    <span class="icon tree-close glyphicon glyphicon-minus-sign" style="display:none"></span>
+            <div class="page-title pull-left">
+                <span class="tree-toggle" id="page-{{ page.id }}">
+                    <span class="btn-link">
+                        <span class="icon tree-open mdi-content-add mdi-material-blue-700"></span>
+                        <span class="icon tree-close mdi-content-remove mdi-material-blue-700" style="display:none"></span>
+                    </span>
                 </span>
-            </span>
 
-            {% set_page_permissions page %}
-            {% if page.perms.change %}
-            <a href="{% url "admin:pages_page_change" page.id %}{% if not page.is_primary %}?parent={{ page.parent_id }}{% endif %}"
-                class="changelink">{{ page.title.strip|default:"&nbsp;" }}</a>
-            {% else %}
-            <span class="uneditable">{{ page.title }}</span>
-            {% endif %}
+                {% set_page_permissions page %}
+                {% if page.perms.change %}
+                <a href="{% url "admin:pages_page_change" page.id %}{% if not page.is_primary %}?parent={{ page.parent_id }}{% endif %}"
+                    class="changelink">{{ page.title.strip|default:"&nbsp;" }}</a>
+                {% else %}
+                <span class="uneditable">{{ page.title }}</span>
+                {% endif %}
 
-            <small class="text-muted text-small">({% get_content_model_for_page page %})</small>
+                <small class="text-muted text-small">({% get_content_model_for_page page %})</small>
+            </div>
 
-            <div class="btn-group pull-right" role="group">
+            <div class="pull-right" role="group">
                 {% if page.perms.add %}
                 <div class="btn-group" role="group">
                     <button class="btn btn-default dropdown-toggle" type="button" id="addpage-{{ page.id }}" data-toggle="dropdown" aria-haspopup="true">
@@ -42,15 +44,11 @@
                 {% endif %}
 
                 {% if page.perms.change %}
-                <span class="ordering btn btn-default">
-                    <span class="glyphicon glyphicon-move"></span>
-                </span>
+                <span class="ordering btn mdi-action-swap-vert"></span>
                 {% endif %}
 
                 {% if page.perms.delete %}
-                <a href="{% url "admin:pages_page_delete" page.id %}?fromtree" class="delete btn btn-default">
-                    <span class="delete glyphicon glyphicon-remove-sign"></span>
-                </a>
+                <a href="{% url "admin:pages_page_delete" page.id %}?fromtree" class="delete btn mdi-content-clear"></a>
                 {% else %}
                 <span class="delete btn btn-default" style="opacity: 0.5"></span>
                 {% endif %}

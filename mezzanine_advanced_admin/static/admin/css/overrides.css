@@ -422,30 +422,6 @@ body {
 .right-panel h2 a {
   color: #555;
 }
-#tree {
-    width: 100%;
-}
-
-.page-title-wrapper > div {
-    display: inline-block;
-}
-
-#tree .page > div {
-    padding: 10px 0;
-    background: #e7e7e7;
-    border: 1px solid #f8f8f8;
-    font-size: 110%;
-}
-
-#tree ol {
-    list-style: none;
-}
-
-.tree-toggle .btn-link {
-    margin-right: 20px;
-    cursor: pointer;
-    text-decoration: none;
-}
 
 .mr10 {
     margin-right: 10px;
@@ -454,20 +430,59 @@ body {
 .mb25 {
     margin-bottom: 25px;
 }
-
-#tree .placeholder .row {
-    height: 50px;
-    border: 1px dashed #333;
+.dropdown .btn {
+    margin-bottom: 0 !important;
+}
+.dropdown ul {
+    width: 100%;
 }
 
+/* PAGE TREE */
+#tree {
+    width: 100%;
+    overflow: hidden;
+}
+#tree>ol {
+    padding-left: 10px;
+}
+#tree ol {
+    list-style: none;
+}
+#tree li {
+}
+#tree .page > div {
+    padding: 0px 0;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.19);
+    font-size: 120%;
+    /*height: 50px;*/
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 3px;
+}
+#tree .tree-toggle .btn-link {
+    padding: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
 #tree .placeholder {
-    outline: 1px dashed #4183C4;
+    outline: 1px dashed #337ab7;
+    height: 50px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 3px;
 }
-
-li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {
-    border-color: #999;
+#tree .page-title {
+    position: relative;
+    top: 12px;
 }
+#tree .ordering,
+#tree .delete {
+    box-shadow: none;
+}
+/*li.mjs-nestedSortable-collapsed.mjs-nestedSortable-hovering div {*/
+    /*border-color: #999;*/
+/*}*/
 
+/* CUSTOMES + HELPERS */
 .disclose, .expandEditor {
     cursor: pointer;
     width: 20px;
@@ -502,4 +517,11 @@ a {
 
 [class^="mdi-"], [class*="mdi-"] {
     transform: translate(-4px, 4px) !important;
+}
+
+#menu-filter .radio {
+    display: inline-block;
+}
+#menu-filter .radio label {
+    padding-left: 30px;
 }

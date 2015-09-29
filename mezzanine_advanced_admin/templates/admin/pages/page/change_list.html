@@ -16,55 +16,56 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-xs-12">
-            <div id="menu-filter" class="row">
-                <div class="col-xs-3">
-                    {% get_menus_for_page as menus %}
-                    <select class="form-control lg">
-                        <option value=""><span class="glyphicon glyphicon-filter"></span>
-                            {% trans "Filter by menu" %} ...
-                            <span class="caret"></span>
-                        </option>
-
-                        {% for menu_id, menu_name, menu_template in menus %}
-                        <option value="{{ menu_name|slugify }}">{{ menu_name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
+        <div id="menu-filter" class="col-xs-10">
+            {% get_menus_for_page as menus %}
+            <p>{% trans "Filter by menu" %} ...</p>
+            <div class="radio radio-material-blue-700">
+                <label>
+                    <input type="radio" value="all-menus" name="menu_filter">
+                    <span class="circle"></span>
+                    <span class="check"></span>
+                    {% trans "All" %}
+                </label>
             </div>
-
-            {% if has_add_permission %}
-                <div id="addlist-primary" class="pull-right mb25">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            {% trans "Add" %} ...
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="addpage">
-                            {% for model in page_models %}
-                                <li>
-                                    {% set_model_permissions model %}
-                                    {% if model.perms.add %}
-                                        <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
+            {% for menu_id, menu_name, menu_template in menus %}
+            <div class="radio radio-material-blue-700">
+                <label>
+                    <input type="radio" value="{{ menu_name|slugify }}" name="menu_filter">
+                    <span class="circle"></span>
+                    <span class="check"></span>
+                    {{ menu_name }}
+                </label>
+            </div>
+            {% endfor %}
         </div>
+
+        {% if has_add_permission %}
+        <div id="addlist-primary" class="col-xs-2">
+            <div class="dropdown">
+                <a class="btn btn-material-blue-700 btn-fab btn-raised mdi-content-add" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
+                    <span class="sr-only">{% trans "Add" %} ...</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="addpage">
+                    {% for model in page_models %}
+                        <li>
+                            {% set_model_permissions model %}
+                            {% if model.perms.add %}
+                                <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 
     <div id="content-main">
-        <div>
-            {% if cl.result_count == 0 %}
-                <p class="paginator">0 {{ cl.opts.verbose_name_plural }}</p>
-            {% else %}
-                <div id="tree">{% page_menu "pages/menus/admin.html" %}</div>
-            {% endif %}
-        </div>
-
+    {% if cl.result_count == 0 %}
+        <p class="paginator">0 {{ cl.opts.verbose_name_plural }}</p>
+    {% else %}
+        <div id="tree">{% page_menu "pages/menus/admin.html" %}</div>
+    {% endif %}
     </div>
 {% endblock %}
