@@ -510,6 +510,10 @@ body {
 a {
   color: #1976d2;
 }
+a:active,
+a:hover {
+  color:  #42a5f5 !important;
+}
 
 .navbar-header {
   margin-top: 10px;
