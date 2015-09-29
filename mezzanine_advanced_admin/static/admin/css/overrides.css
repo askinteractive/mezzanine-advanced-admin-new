@@ -327,6 +327,8 @@ body {
     z-index: 1000;
     font-size: 12px;
     overflow-y: auto;
+    overflow-x: hidden;
+    /*min-width: 75px;*/
 }
 
 .menu-fixed .navbar-brand span {
