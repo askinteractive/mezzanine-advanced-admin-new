@@ -24,6 +24,16 @@
             </div>
 
             <div class="pull-right" role="group">
+
+                <!-- Draft / publish -->
+                <span class="togglebutton togglebutton-material-blue-700">
+                    <label>
+                        {{ page.get_status_display }}
+                        <input type="checkbox"{% if page.status > 1 %} checked{% endif %}>
+                        <span class="toggle"></span>
+                    </label>
+                </span>
+
                 {% if page.perms.add %}
                 <div class="btn-group" role="group">
                     <button class="btn btn-default dropdown-toggle" type="button" id="addpage-{{ page.id }}" data-toggle="dropdown" aria-haspopup="true">
