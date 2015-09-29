@@ -525,3 +525,29 @@ a {
 #menu-filter .radio label {
     padding-left: 30px;
 }
+
+.navbar-brand img {
+    margin: auto;
+}
+
+.contain-sm {
+    max-width: 769px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.background-login {
+    background-image:url('/static/admin/images/lyon_panorama.jpg');
+    height: 170px;
+}
+
+.login-main .transparent {
+    background-color:transparent;
+    box-shadow: none;
+    color: inherit;
+}
+
+.login-main .box-xs {
+    width: 30%;
+    margin-left: 35%;
+}
