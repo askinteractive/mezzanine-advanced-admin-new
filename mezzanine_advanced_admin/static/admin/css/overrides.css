@@ -443,10 +443,10 @@ body {
 .pt25 {
     padding-top: 25px;
 }
-fieldset .panel-heading {
+form .panel-heading {
   font-size: 150%;
 }
-fieldset .panel-heading a {
+form .panel-heading a {
     text-decoration: none;
 }
 
@@ -508,18 +508,29 @@ fieldset .panel-heading a {
     /*border-color: #999;*/
 /*}*/
 
+
 /* CUSTOMES + HELPERS */
 .disclose, .expandEditor {
     cursor: pointer;
     width: 20px;
     display: none;
 }
-
+.inline-stacked>fieldset:not(:last-child) {
+    border-bottom: 3px solid #f1f1f1;
+    margin: 1px;
+}
+.inline-stacked legend {
+    padding: 10px 25px;
+    margin-bottom: 0;
+}
 .sortable li.mjs-nestedSortable-collapsed > ol {
     display: none;
 }
 .sortable li.mjs-nestedSortable-branch > div > .disclose {
     display: inline-block;
+}
+.sortable-placeholder {
+    border: 1px dashed #999 !important;
 }
 .drag-handler {
     cursor: move;

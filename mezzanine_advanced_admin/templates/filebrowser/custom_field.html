@@ -31,8 +31,7 @@
             <span class="input-group-btn">
                 <span
                    onclick="FileBrowser.show($(this).parents('.input-group').find('input')[0].id, '{{ url }}?pop=1{% if final_attrs.directory %}&amp;dir={{ final_attrs.directory|urlencode|urlencode }}{% endif %}{% if final_attrs.format %}&amp;type={{ final_attrs.format }}{% endif %}');"
-                   class="fb_show btn btn-default btn-info">
-                    <span class="glyphicon glyphicon-search" title="{% trans "Change" %}"></span>
+                   class="fb_show btn btn-material-blue-700 mdi-action-search" title="{% trans "Change" %}">
                 </span>
             </span>
         </div>

@@ -1,6 +1,6 @@
 {% load i18n admin_static admin_urls admin_modify advanced_admin_tags %}
 
-<div class="_inline-group" id="{{ inline_admin_formset.formset.prefix }}-group">
+<div class="_inline-group mb25" id="{{ inline_admin_formset.formset.prefix }}-group">
     <div class="tabular inline-related {% if forloop.last %}last-related{% endif %}">
         {{ inline_admin_formset.formset.management_form }}
         <fieldset class="module panel">
@@ -84,7 +84,7 @@
                                                     <div class="alert alert-danger">{{ field.errors|striptags }}</div>
                                                 {% endif %}
                                                 {% if field.field.name == inline_admin_formset.opts.sortable_field_name %}
-                                                    <span class="drag-handler mdi-action-open-with" title="{% trans "Move" %}"> </span>
+                                                    <span class="drag-handler mdi-action-swap-vert" title="{% trans "Move" %}"> </span>
                                                     {{ field.field }}
                                                 {% else %}
 {#                                                    {% render_field field.field %}#}
@@ -211,7 +211,8 @@ function initSortable() {
         forcePlaceholderSize: true,
         opacity: 0.5,
         forceHelperSize: true,
-        tolerance: "intersect"
+        tolerance: "intersect",
+{#        placeholder: "sortable-placeholder"#}
     });
 }
 function initDeleteRow() {
