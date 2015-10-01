@@ -140,13 +140,18 @@ a.selector-clearall {
 }
 
 .checkbox{
-    padding-bottom: 5px;
+    /*padding-bottom: 5px;*/
+    transform: translate(-10px, -18px);
 }
 .checkbox label {
     margin-bottom: -20px;
 }
 .checkbox .help-block {
     margin-top: 0;
+    padding-top: 0;
+    font-style: italic;
+    font-size: 95%;
+    color: #888;
 }
 
 fieldset.collapse {
@@ -154,6 +159,10 @@ fieldset.collapse {
 }
 .add-row {
     margin-bottom: 20px;
+}
+.add-row a {
+    float: right;
+    padding: 20px;
 }
 legend a:hover {
     text-decoration: none;
@@ -431,6 +440,16 @@ body {
 .mb25 {
     margin-bottom: 25px;
 }
+.pt25 {
+    padding-top: 25px;
+}
+fieldset .panel-heading {
+  font-size: 150%;
+}
+fieldset .panel-heading a {
+    text-decoration: none;
+}
+
 .dropdown .btn {
     margin-bottom: 0 !important;
 }
@@ -499,9 +518,16 @@ body {
 .sortable li.mjs-nestedSortable-collapsed > ol {
     display: none;
 }
-
 .sortable li.mjs-nestedSortable-branch > div > .disclose {
     display: inline-block;
+}
+.drag-handler {
+    cursor: move;
+}
+.delete a {
+    text-decoration: none;
+    color: #888;
+    cursor: pointer !important;
 }
 .text-small {
     font-size: 0.75em;
@@ -520,6 +546,9 @@ a {
 a:active,
 a:hover {
   color:  #42a5f5 !important;
+}
+a:not([href]) {
+    cursor: default;
 }
 
 [class^="mdi-"], [class*="mdi-"] {

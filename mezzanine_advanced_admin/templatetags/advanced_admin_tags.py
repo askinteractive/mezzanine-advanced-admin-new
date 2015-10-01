@@ -117,7 +117,7 @@ def render_app_description(context, app, fallback="", template="/admin_app_descr
     return text
 
 
-@register.simple_tag(takes_context=True, name="dab_field_rendering")
+@register.simple_tag(takes_context=True, name="render_field")
 def custom_field_rendering(context, field, *args, **kwargs):
     """ Wrapper for rendering the field via an external renderer """
     if CUSTOM_FIELD_RENDERER:

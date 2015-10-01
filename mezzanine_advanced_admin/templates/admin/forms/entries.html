@@ -5,7 +5,7 @@
 {% block extrahead %}
 {{ block.super }}
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' packages="mezzanine.forms" %}"></script>
-<script src="{% static "mezzanine/js/admin/form_entries.js" %}"></script>
+<script src="{% static "admin/js/form_entries.js" %}"></script>
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -44,7 +44,7 @@
                 </td>
                 <td class="filter row">
                     <div class="col-xs-2">
-                        {% dab_field_rendering filter_field size="small"%}
+                        {% render_field filter_field size="small"%}
                     </div>
                     <div class="options-div col-xs-10">
                         {% for option_field in filter_option_fields %}
@@ -77,6 +77,8 @@
     </table>
 
     <button type="submit" name="back" class="btn pull-left"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</button>
+        <input type="submit" name="back" class="btn pull-left" value="{% trans "Back to form" %}"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</input>
+
     <button type="submit" class="btn btn-material-blue-400 pull-right" name="export"><i class="mdi-file-file-download"></i>{% trans "Export CSV" %}</button>
     <button type="submit" class="btn btn-material-blue-700 pull-right"><i class="mdi-action-view-list"></i>{% trans "View entries" %}</button>
     <div class="clearfix"></div>

@@ -88,7 +88,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-DAB_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
+ADVANCED_ADMIN_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

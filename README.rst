@@ -30,7 +30,7 @@ There's one available in tree that requires the ``django-bootstrap3`` applicatio
 You have to add to your project settings file:
 ::
 
-    DAB_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
+    ADVANCED_ADMIN_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
 
 
 `Messages <http://docs.djangoproject.com/en/dev/ref/contrib/messages>`__ will have ``alert-info`` tag by default, 

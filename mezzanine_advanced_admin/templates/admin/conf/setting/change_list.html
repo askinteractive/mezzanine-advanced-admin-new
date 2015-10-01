@@ -46,7 +46,7 @@
         {% else %}
             <label for="{{ field.auto_id }}" class="control-label col-sm-2">{{ field.label }}</label>
             <div class="col-sm-10">
-                {% dab_field_rendering field %}{{ field.errors }}
+                {% render_field field %}{{ field.errors }}
             </div>
         {% endif %}
         </div>

@@ -12,10 +12,12 @@ except ImportError:
     from bootstrap3.html import add_css_class
 from bootstrap3.text import text_value
 
+
 class BootstrapFieldRenderer(renderers.FieldRenderer):
     """
     A django-bootstrap3 field renderer that renders just the field
     """
+    # TODO Render Checkbox, Radio, and Date
     def render(self):
         # Hidden input requires no special treatment
         if self.field.is_hidden:
@@ -23,6 +25,17 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
         # Render the widget
         self.add_widget_attrs()
         html = self.field.as_widget(attrs=self.widget.attrs)
+        # Start post render
+        html = self.wrap_widget(html)
+        return html
+
+    def wrap_widget(self, html):
+        if isinstance(self.widget, (CheckboxInput)):
+            checkbox_class = add_css_class('checkbox checkbox-material-blue-700', self.get_size_class())
+            html = '<div class="{klass}">{content}<span class="checkbox-material"><span class="check"></span></span></div>'.format(
+                klass=checkbox_class,
+                content=html,
+            )
         return html
 
     def add_class_attrs(self, widget=None):
@@ -50,4 +63,5 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
             classes = add_css_class(classes, 'form-control', prepend=True)
             # For these widget types, add the size class here
             classes = add_css_class(classes, self.get_size_class())
+
         widget.attrs['class'] = classes

@@ -114,11 +114,11 @@
                             {% endfor %}
                             {% endif %}
                             <div class="form-group floating-label">
-                                {% dab_field_rendering form.username %}
+                                {% render_field form.username %}
                             </div>
                             <div class="form-group">
                                 <p class="text-danger">{{ form.password.errors|striptags }}</p>
-                                {% dab_field_rendering form.password %}
+                                {% render_field form.password %}
                                 <input type="hidden" name="next" value="{{ next }}" />
                             </div>
                             {% url 'admin_password_reset' as password_reset_url %}

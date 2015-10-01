@@ -11,10 +11,6 @@ class SortableInline(object):
     sortable_field_name = "_order"
 
     class Media:
-        js = (
-            'admin/js/jquery.sortable.js',
-        )
-
         css = {
             'all': ('admin/css/admin-inlines.css', )
         }

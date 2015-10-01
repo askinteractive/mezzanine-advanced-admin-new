@@ -29,7 +29,7 @@ else:
 
         def render_template(self, field):
             context = { 'field': field }
-            template = Template('{% load bootstrapped_goodies_tags %} {% dab_field_rendering field %}')
+            template = Template('{% load bootstrapped_goodies_tags %} {% render_field field %}')
             return template.render(Context(context))
 
         def test_basic_functionality(self):
