@@ -17,6 +17,7 @@ a:focus {
     display: inline-block;
     font-variant: small-caps;
     color: rgba(255,​ 255,​ 255,​ 0.84);
+    margin-top: 3px;
 }
 #admin-title img {
     padding: 10px 20px;
@@ -521,10 +522,6 @@ a:hover {
   color:  #42a5f5 !important;
 }
 
-.navbar-header {
-  margin-top: 10px;
-}
-
 [class^="mdi-"], [class*="mdi-"] {
     transform: translate(-4px, 4px) !important;
 }
@@ -560,4 +557,21 @@ a:hover {
 .login-main .box-xs {
     width: 30%;
     margin-left: 35%;
+}
+
+.navbar .alert-success {
+    margin-top: 10px;
+}
+
+
+#addlist-primary, .nav .add-button {
+    position: fixed;
+    bottom: 25px;
+    right: 40px;
+    z-index: 100000;
+}
+
+.nav .add-button i {
+    top: -7px;
+    left: 5px;
 }

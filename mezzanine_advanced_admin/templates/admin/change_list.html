@@ -48,9 +48,9 @@
     <ul class="object-tools nav pull-right">
         {% block object-tools-items %}
         {% if has_add_permission %}
-        <li>
+        <li class="add-button">
         {% url cl.opts|admin_urlname:'add' as add_url %}
-            <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-fab btn-raised btn-material-blue-100" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
+            <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-fab btn-raised btn-material-blue-700" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
                 <i class="mdi-content-add"></i><span></span>
             </a>
         </li>
@@ -132,5 +132,3 @@
 {% endblock %}
 </form>
 {% endblock %}
-
-

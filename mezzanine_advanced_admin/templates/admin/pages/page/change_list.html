@@ -5,7 +5,7 @@
     {{ block.super }}
     <script>
     window.__page_ordering_url = '{% url "admin_page_ordering" %}';
-    window.__page_update_status_url = '{% url "admin_page_update_status" %}';
+    {#window.__page_update_status_url = '{% url "admin_page_update_status" %}';#}
     </script>
     {#<script src="{% static "admin/js/jquery-sortable.js" %}"></script>#}
     <script src="{% static "admin/js/jquery-ui-1.10.4.custom.min.js" %}"></script>
@@ -43,7 +43,7 @@
         </div>
 
         {% if has_add_permission %}
-        <div id="addlist-primary" class="col-xs-2">
+        <div id="addlist-primary">
             <div class="dropdown">
                 <a class="btn btn-material-blue-700 btn-fab btn-raised mdi-content-add" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
                     <span class="sr-only">{% trans "Add" %} ...</span>

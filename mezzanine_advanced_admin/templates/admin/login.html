@@ -99,6 +99,7 @@
                         {% block branding %}
                         <a class="navbar-brand" href="{% url 'admin:index' %}" id="admin-title">{% admin_title %}</a>
                         {% endblock %}
+                        <div class="spacer"></div>
                         <form class="form floating-label" action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
                         {% if form.errors and not form.non_field_errors %}
                             <div class="alert style-danger">

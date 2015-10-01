@@ -12,7 +12,7 @@
 {% if change %}{% if not is_popup %}
   <ul class="object-tools">
     {#<li><a href="export/">{% trans "Export" %}</a></li>#}
-    <li>
+    <li class="add-button">
         {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
         <a href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
     </li>
