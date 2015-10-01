@@ -1,5 +1,5 @@
 {% if show %}
-<ul class="nav nav-pills">
+<ul class="nav nav-pills mb25">
 {% if back %}<li class="date-back active"><a href="{{ back.link }}">&lsaquo; {{ back.title }}</a></li>{% endif %}
 {% for choice in choices %}
     <li><a href="{% if choice.link %}{{ choice.link }}{% else %}#{% endif %}">{{ choice.title }}</a></li>

@@ -22,6 +22,8 @@
 (function($) {
     $(document).ready(function($) {
         $("tr input.action-select").actions();
+{#        $("[class^=action-checkbox] input").wrap($('<span>', {'class': 'checkbox checkbox-material-blue-700'})).wrap('<label>') ;#}
+{#        $(".checkbox label").append($('<span class="checkbox-material">').append('<span class="check">'));#}
     });
 })(django.jQuery);
 </script>
@@ -110,22 +112,22 @@
         {% endblock %}
     </div>
 </div>
-{# {% if cl.formset and cl.result_count %} #}
-<div class="navbar navbar-default">
+ {% if cl.formset and cl.result_count or action_form and actions_on_bottom and cl.show_admin_actions %}
+<div class="navbar navbar-white">
     <div class="navbar-inner">
         <div class="navbar-form pull-left">
             {% if action_form and actions_on_bottom and cl.show_admin_actions %}
                 {% admin_actions %}
             {% endif %}
         </div>
-{% if cl.formset and cl.result_count %}
+        {% if cl.formset and cl.result_count %}
         <div class="navbar-form pull-right">
-            <input type="submit" name="_save" class="btn btn-primary default" value="{% trans 'Save' %}"/>
+            <input type="submit" name="_save" class="btn btn-material-blue-700 default" value="{% trans 'Save' %}"/>
         </div>
-{% endif %}
+        {% endif %}
     </div>
 </div>
-{# {% endif %} #}
+ {% endif %}
 
 {% block pagination %}
     {% pagination cl %}

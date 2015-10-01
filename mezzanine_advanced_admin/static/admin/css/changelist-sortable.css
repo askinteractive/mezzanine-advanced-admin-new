@@ -1,0 +1,9 @@
+.column-_order {
+    width: 80px;
+}
+.column-_order .sortoptions {
+    display: none;
+}
+.ordering img {
+    display: none;
+}
