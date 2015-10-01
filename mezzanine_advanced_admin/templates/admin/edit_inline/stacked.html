@@ -85,8 +85,10 @@
         var rows = "#{{ inline_admin_formset.formset.prefix }}-group .inline-related";
         var updateInlineLabel = function(row) {
             $(rows).find(".inline-label").each(function(i) {
-                var count = i + 1;
+                var count = i + 2;
                 $(this).html($(this).html().replace(/(#\d+)/g, "#" + count));
+                var blockId = $(this).parents(".inline-related").attr("id");
+                $(this).parent().attr("data-target", "#" + blockId + " > .collapse");
             });
         };
         var reinitDateTimeShortCuts = function() {
