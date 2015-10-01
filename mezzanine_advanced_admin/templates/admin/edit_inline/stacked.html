@@ -30,23 +30,25 @@
                     {# Collapse icon #}
                     <span class="mdi-action-open-in-new"></span>
 
-                    {# Order icon #}
-                    {% if inline_admin_formset.opts.sortable_field_name %}
-                    <span class="drag-handler mdi-action-swap-vert"></span>
-                    {% endif %}
-
                 </a>
+
                 {% if inline_admin_form.show_url %}
                     <a href="{{ inline_admin_form.absolute_url }}">{% trans "View on site" %}</a>
                 {% endif %}
-                {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}
-                <div class="pull-right">
-                        <div class="delete">
+
+                <div class="stacked-actions pull-right">
+                        {# Order icon #}
+                        {% if inline_admin_formset.opts.sortable_field_name %}
+                        <span class="drag-handler mdi-action-swap-vert"></span>
+                        {% endif %}
+                        {# Delete icon #}
+                        {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}
+                        <span class="delete">
                             {{ inline_admin_form.deletion_field.field }}
-                            <div><a class="mdi-content-clear" title="{% trans "Delete" %}"></a></div>
-                        </div>
+                            <a class="mdi-content-clear" title="{% trans "Delete" %}"></a>
+                        </span>
+                        {% endif %}
                 </div>
-                {% endif %}
           </legend>
           {% for fieldset in inline_admin_form %}
               {% for line in fieldset %}
@@ -125,7 +127,7 @@
             prefix: "{{ inline_admin_formset.formset.prefix }}",
             addText: "<span class=\"mdi-content-add\"></span>{% trans "Add another" %}",
             formCssClass: "dynamic-{{ inline_admin_formset.formset.prefix }}",
-            deleteCssClass: "mdi-content-clear",
+            deleteCssClass: "mdi-content-clear delete",
             deleteText: "",
             emptyCssClass: "empty-form",
             removed: updateInlineLabel,
@@ -135,7 +137,10 @@
                 updateSelectFilter();
                 updateInlineLabel(row);
                 initStackedSortable();
-                $(row).find('.delete').removeAttr('href').removeClass('delete').parent().addClass('delete').wrap($('<div>', {'class': "pull-right"}));
+                var deleteElement = $(row).find('.delete');
+                deleteElement.removeAttr('href').removeClass('delete');
+                $(row).find(".stacked-actions").append(deleteElement);
+                deleteElement.wrap('<span class="delete">');
                 initStackedDeleteRow();
             })
         });
