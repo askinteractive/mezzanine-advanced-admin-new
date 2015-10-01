@@ -8,7 +8,7 @@
         {{ inline_admin_formset.formset.non_form_errors }}
     </div>
     {% endif %}
-    <div class="items inline-stacked">
+    <div class="items inline-stacked panel-body">
         {% for inline_admin_form in inline_admin_formset %}
         <fieldset class="inline-related{% if inline_admin_form.original or inline_admin_form.show_url %} has_original{% endif %}{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
             <legend>
@@ -123,10 +123,10 @@
         };
         $(rows).formset({
             prefix: "{{ inline_admin_formset.formset.prefix }}",
-            addText: "<span class='btn'><i class='glyphicon glyphicon-plus'></i> {% blocktrans with verbose_name=inline_admin_formset.opts.verbose_name|capfirst %}Add another {{ verbose_name }}{% endblocktrans %}</span>",
+            addText: "<span class=\"mdi-content-add\"></span>{% trans "Add another" %}",
             formCssClass: "dynamic-{{ inline_admin_formset.formset.prefix }}",
-            deleteCssClass: "delete btn btn-default btn-xs",
-            deleteText: "<span class='glyphicon glyphicon-remove-sign'></span>",
+            deleteCssClass: "mdi-content-clear",
+            deleteText: "",
             emptyCssClass: "empty-form",
             removed: updateInlineLabel,
             added: (function(row) {

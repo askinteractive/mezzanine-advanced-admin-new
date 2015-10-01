@@ -515,12 +515,12 @@ form .panel-heading a {
     width: 20px;
     display: none;
 }
-.inline-stacked>fieldset:not(:last-child) {
-    border-bottom: 3px solid #f1f1f1;
+.inline-stacked>fieldset:not(.empty-form):not(:last-child) {
+    /*border: 3px solid #f1f1f1;*/
     margin: 1px;
 }
 .inline-stacked legend {
-    padding: 10px 25px;
+    padding: 10px 0px;
     margin-bottom: 0;
 }
 .sortable li.mjs-nestedSortable-collapsed > ol {
