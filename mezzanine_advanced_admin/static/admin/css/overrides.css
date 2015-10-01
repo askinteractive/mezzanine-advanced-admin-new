@@ -146,7 +146,7 @@ a.selector-clearall {
 .checkbox label {
     margin-bottom: -20px;
 }
-.checkbox .help-block {
+.help-block {
     margin-top: 0;
     padding-top: 0;
     font-style: italic;
@@ -550,14 +550,14 @@ a:hover {
 a:not([href]) {
     cursor: default;
 }
-
 [class^="mdi-"], [class*="mdi-"] {
     transform: translate(-4px, 4px) !important;
 }
-
+.radioselect .radio,
 #menu-filter .radio {
     display: inline-block;
 }
+.radioselect .radio label,
 #menu-filter .radio label {
     padding-left: 30px;
 }
