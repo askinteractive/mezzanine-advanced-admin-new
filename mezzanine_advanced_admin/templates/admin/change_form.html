@@ -4,12 +4,37 @@
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<script type="text/javascript" src="{% static "plugins/material-datepicker/moment.js" %}"></script>
+<script type="text/javascript" src="{% static "plugins/material-datepicker/material-datepicker.js" %}"></script>
+<script>
+$(function () {
+    $('p.material-datepicker input.vDateField').bootstrapMaterialDatePicker({
+        cancelText: '{% trans "Cancel" %}',
+        okText: '{% trans "OK" %}',
+        lang: 'fr',
+        weekStrart: 1,
+        date: true,
+        time: false
+    });
+    $('p.material-datepicker input.vTimeField').bootstrapMaterialDatePicker({
+        format: "HH:mm",
+        lang: 'fr',
+        weekStrart: 1,
+        cancelText: '{% trans "Cancel" %}',
+        okText: '{% trans "OK" %}',
+        date: false,
+        time: true,
+        shortTime: false
+    });
+});
+</script>
 {{ media }}
 {% endblock %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+    <link rel="stylesheet" href="{% static "plugins/material-datepicker/material-datepicker.css" %}">
 {% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
