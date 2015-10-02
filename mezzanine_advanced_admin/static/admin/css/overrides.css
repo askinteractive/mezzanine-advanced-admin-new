@@ -564,15 +564,14 @@ a:not([href]) {
 [class^="mdi-"], [class*="mdi-"] {
     transform: translate(-4px, 4px) !important;
 }
-.radioselect .radio,
-#menu-filter .radio {
+.multicheckbox .checkbox,
+.radioselect .radio {
     display: inline-block;
 }
 .radioselect .radio label,
-#menu-filter .radio label {
+.multicheckbox .checkbox label {
     padding-left: 30px;
 }
-
 .navbar-brand img {
     margin: auto;
 }

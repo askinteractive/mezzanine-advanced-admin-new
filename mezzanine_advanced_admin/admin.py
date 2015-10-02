@@ -11,7 +11,6 @@ class BaseSortable(object):
 
     def get_fields(self, request, obj=None):
         fields = super(BaseSortable, self).get_fields(request, obj)
-        print fields
         try:
             fields.remove(self.sortable_field_name)
         except:

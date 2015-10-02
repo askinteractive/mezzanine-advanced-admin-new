@@ -48,6 +48,9 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
             html = self.fix_radio_select_input(html)
         elif isinstance(self.widget, CheckboxSelectMultiple):
             html = self.list_to_class(html, 'checkbox')
+            html = self.fix_checkbox_select_input(html)
+        elif isinstance(self.widget, AdminSplitDateTime):
+            html = self.fix_split_datetime(html)
         elif isinstance(self.widget, SelectDateWidget):
             html = self.fix_date_select_input(html)
         elif isinstance(self.widget, ClearableFileInput):
@@ -58,6 +61,19 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
         def wrap(m):
             return '<input ' + m.group(1) +'/><span class="circle"></span><span class="check"></span>'
         html = re.sub(r'<input (.*)/>', wrap, html)
+        return html
+
+    def fix_checkbox_select_input(self, html):
+        def wrap(m):
+            return '<input ' + m.group(1) +'/><span class="checkbox-material"><span class="check"></span></span>'
+        html = re.sub(r'<input (.*)/>', wrap, html)
+        return html
+
+    def fix_split_datetime(self, html):
+        # Hide the built-in widget
+        html = html.replace('class="datetime"', 'class="datetime material-datepicker"')
+        # Create a new one
+        # html = '<input type="text" class="form-control material-datepicker">' + html
         return html
 
     def list_to_class(self, html, klass):
