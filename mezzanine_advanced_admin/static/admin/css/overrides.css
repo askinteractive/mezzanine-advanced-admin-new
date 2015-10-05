@@ -614,3 +614,6 @@ a:not([href]) {
     top: -7px;
     left: 5px;
 }
+.datetimeshortcuts {
+    display: none;
+}

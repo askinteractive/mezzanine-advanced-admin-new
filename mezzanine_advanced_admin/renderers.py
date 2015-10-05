@@ -71,9 +71,10 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
 
     def fix_split_datetime(self, html):
         # Hide the built-in widget
-        html = html.replace('class="datetime"', 'class="datetime material-datepicker"')
+        # html = html.replace('class="datetime"', 'class="datetime material-datepicker"')
         # Create a new one
         # html = '<input type="text" class="form-control material-datepicker">' + html
+        print html
         return html
 
     def list_to_class(self, html, klass):
@@ -105,7 +106,7 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
                                  AdminTimeWidget,
                                  RelatedFieldWidgetWrapper)):
             # for some admin widgets we don't want the input to take full horizontal space
-            classes = add_css_class(classes, 'form-control form-control-inline', prepend=True)
+            classes = add_css_class(classes, 'form-control form-control-inline material-datepicker', prepend=True)
         elif isinstance(widget, RadioSelect):
             classes = add_css_class(classes, 'radioselect', prepend=True)
         elif not isinstance(widget, (CheckboxInput,

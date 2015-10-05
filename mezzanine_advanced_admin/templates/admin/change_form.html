@@ -8,23 +8,23 @@
 <script type="text/javascript" src="{% static "plugins/material-datepicker/material-datepicker.js" %}"></script>
 <script>
 $(function () {
-    $('p.material-datepicker input.vDateField').bootstrapMaterialDatePicker({
+    $('.material-datepicker.vDateField').bootstrapMaterialDatePicker({
         cancelText: '{% trans "Cancel" %}',
         okText: '{% trans "OK" %}',
-        lang: 'fr',
-        weekStrart: 1,
+        lang: '{{ LANGUAGE_CODE }}',
+        weekStart: parseInt(get_format('FIRST_DAY_OF_WEEK')),
         date: true,
         time: false
     });
-    $('p.material-datepicker input.vTimeField').bootstrapMaterialDatePicker({
-        format: "HH:mm",
-        lang: 'fr',
-        weekStrart: 1,
+    $('.material-datepicker.vTimeField').bootstrapMaterialDatePicker({
         cancelText: '{% trans "Cancel" %}',
         okText: '{% trans "OK" %}',
+        lang: '{{ LANGUAGE_CODE }}',
+        weekStart: parseInt(get_format('FIRST_DAY_OF_WEEK')),
         date: false,
         time: true,
-        shortTime: false
+        shortTime: false,
+        format: "HH:mm"
     });
 });
 </script>
