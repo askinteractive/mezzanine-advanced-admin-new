@@ -4,12 +4,43 @@
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<script type="text/javascript" src="{% static "plugins/material-datepicker/moment.js" %}"></script>
+<script type="text/javascript" src="{% static "plugins/material-datepicker/material-datepicker.js" %}"></script>
 {{ media }}
+<script>
+$(document).ready(function () {
+    $('.material-datepicker.vDateField').bootstrapMaterialDatePicker({
+        cancelText: '{% trans "Cancel" %}',
+        okText: '{% trans "OK" %}',
+        lang: '{{ LANGUAGE_CODE }}',
+        weekStart: parseInt(get_format('FIRST_DAY_OF_WEEK')),
+        date: true,
+        time: false
+    }).after($("<a>", {"class": "mdi-action-event dtp-launcher"}).on('click', function () {
+        var attachedInput = $(this).prev().prev();
+        attachedInput.bootstrapMaterialDatePicker("_onClick");
+    }));
+    $('.material-datepicker.vTimeField').bootstrapMaterialDatePicker({
+        cancelText: '{% trans "Cancel" %}',
+        okText: '{% trans "OK" %}',
+        lang: '{{ LANGUAGE_CODE }}',
+        weekStart: parseInt(get_format('FIRST_DAY_OF_WEEK')),
+        date: false,
+        time: true,
+        shortTime: false,
+        format: "HH:mm"
+    }).after($("<a>", {"class": "mdi-action-schedule dtp-launcher"}).on('click', function () {
+        var attachedInput = $(this).prev().prev();
+        attachedInput.bootstrapMaterialDatePicker("_onClick");
+    }));
+});
+</script>
 {% endblock %}
 
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+    <link rel="stylesheet" href="{% static "plugins/material-datepicker/material-datepicker.css" %}">
 {% endblock %}
 
 {% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
