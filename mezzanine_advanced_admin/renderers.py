@@ -70,11 +70,13 @@ class BootstrapFieldRenderer(renderers.FieldRenderer):
         return html
 
     def fix_split_datetime(self, html):
+        # def wrap(m):
+        #     return '<input ' + m.group(1) +'/><div><span class="mdi-action-event"></span></div>'
         # Hide the built-in widget
         # html = html.replace('class="datetime"', 'class="datetime material-datepicker"')
         # Create a new one
         # html = '<input type="text" class="form-control material-datepicker">' + html
-        print html
+        # html = re.sub(r'<input (.*) />', wrap, html)
         return html
 
     def list_to_class(self, html, klass):

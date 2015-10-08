@@ -614,6 +614,18 @@ a:not([href]) {
     top: -7px;
     left: 5px;
 }
+/* Datepicker */
 .datetimeshortcuts {
     display: none;
+}
+p.datetime {
+    width: 180px;
+}
+p.datetime input {
+    margin-right: 25px;
+}
+p.datetime a {
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
 }

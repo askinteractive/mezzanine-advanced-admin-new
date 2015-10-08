@@ -64,7 +64,8 @@
 			this._attachEvent(this.$dtpElement.find('.dtp-content'), 'click', this._onElementClick.bind(this));
 			this._attachEvent(this.$dtpElement, 'click', this._onBackgroundClick.bind(this));
 			this._attachEvent(this.$dtpElement.find('.dtp-close > a'), 'click', this._onCloseClick.bind(this));
-			this._attachEvent(this.$element, 'click', this._onClick.bind(this));
+			/* Custom Askin */
+			//this._attachEvent(this.$element, 'click', this._onClick.bind(this));
 		},
 		initDays: function()
 		{
@@ -206,6 +207,7 @@
 		},
 		initTemplate: function()
 		{
+			/* Custom Askin : Change OK button class */
 			this.template = '<div class="dtp hidden" id="' + this.name + '">' +
 								'<div class="dtp-content">' +
 									'<div class="dtp-date-view">' +
@@ -258,7 +260,7 @@
 									'</div>' +
 									'<div class="dtp-buttons">' +
 										'<button class="dtp-btn-cancel btn btn-flat">' + this.params.cancelText + '</button>' +
-										'<button class="dtp-btn-ok btn btn-flat">' + this.params.okText + '</button>' +
+										'<button class="dtp-btn-ok btn btn-material-blue-700">' + this.params.okText + '</button>' +
 										'<div class="clearfix"></div>' +
 									'</div>' +
 								'</div>' +
