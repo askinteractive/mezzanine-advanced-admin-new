@@ -627,3 +627,6 @@ a:not([href]) {
     text-transform: uppercase;
     /*font-variant: small-caps;*/
 }
+.tab-content fieldset {
+    padding-top: 25px;
+}

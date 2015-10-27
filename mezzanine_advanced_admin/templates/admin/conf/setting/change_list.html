@@ -5,26 +5,37 @@
 {% block content-navbar-collapse %}{% endblock %}
 
 {% block content %}
-    <br/>
-<div>
-
     {% if request.POST %}
         <p class="errornote">{% trans "Please correct the errors below." %}</p>
         {{ settings_form.non_field_errors }}
     {% endif %}
 
+
     <form method="post" class="form-horizontal" id="settings-form">
     {% csrf_token %}
+
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="submit" class="btn btn-material-blue-700 pull-right"><i class="mdi-content-save"></i>&nbsp;{% trans "Save" %}</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        {% for field in settings_form %}
+        {% ifchanged field.group %}
+        <li role="presentation"{% if forloop.first %} class="active"{% endif %}><a href="#{{ field.group|slugify }}" aria-controls="{{ field.group|slugify }}" role="tab" data-toggle="tab">{% trans field.group %}</a></li>
+        {% endifchanged %}
+        {% endfor %}
+    </ul>
+    <div class="tab-content">
     {% for field in settings_form %}
         {% ifchanged field.group %}
             {% if not forloop.first %}
-            </div></div>
+            </fieldset></div>
             {% endif %}
-            <div class="panel">
-                <div class="panel-heading">
-                    <h2>{% trans field.group %}</h2>
-                </div>
-                <div class="panel-body">
+            <div role="tabpanel" class="tab-pane{% if forloop.first %} active{% endif %}" id="{{ field.group|slugify }}">
+            <fieldset class="panel">
         {% endifchanged %}
         <div class="form-group">
         {% if field|widget_type == "checkboxinput" %}
@@ -51,15 +62,11 @@
         {% endif %}
         </div>
         {% if forloop.last %}
-            </div></div>
+            </fieldset></div>
         {% endif %}
     {% endfor %}
-
-    <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-            <button type="submit" class="btn btn-material-blue-700 pull-right"><i class="mdi-content-save"></i>&nbsp;{% trans "Save" %}</button>
-        </div>
     </div>
+
     </form>
 
 </div>
