@@ -1,18 +1,18 @@
 {% load advanced_admin_tags %}
 <fieldset class="_module _aligned panel" id="fieldset-{% if stacked_prefix %}{{ stacked_prefix }}-{% endif %}{{ forloop.counter }}">
-    {% if fieldset.name %}
-    <div class="panel-heading">
-        {% if 'collapse' in fieldset.classes %}
-        <a data-toggle="collapse" data-target="#fieldset-{% if stacked_prefix %}{{ stacked_prefix }}-{% endif %}{{ forloop.counter }} .fields">
-        {{ fieldset.name }}
-        &nbsp;<span class="mdi-action-open-in-new"></span>
-        </a>
-        {% else %}
-        <a>{{ fieldset.name }}</a>
-        {% endif %}
-    </div>
-    {% endif %}
-    <div class="panel-body fields {% if not errors %}{{ fieldset.classes }}{% endif %}{% if fieldset.classes == "collapse-closed" %} collapse{% endif %}"{% if fieldset.classes == "collapsed-closed" %}aria-expanded="false"{% endif %}>
+{#    {% if fieldset.name %}#}
+{#    <div class="panel-heading">#}
+{#        {% if 'collapse' in fieldset.classes %}#}
+{#        <a data-toggle="collapse" data-target="#fieldset-{% if stacked_prefix %}{{ stacked_prefix }}-{% endif %}{{ forloop.counter }} .fields">#}
+{#        {{ fieldset.name }}#}
+{#        &nbsp;<span class="mdi-action-open-in-new"></span>#}
+{#        </a>#}
+{#        {% else %}#}
+{#        <a>{{ fieldset.name }}</a>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#    {% endif %}#}
+    <div class="panel-body fields {% if not errors %}{{ fieldset.classes }}{% endif %}{% comment %}{% if fieldset.classes == "collapse-closed" %} collapse{% endif %}{% endcomment %}"{% if fieldset.classes == "collapsed-closed" %}aria-expanded="false"{% endif %}>
     {% if fieldset.description %}
         <div class="description">{{ fieldset.description|safe }}</div>
     {% endif %}

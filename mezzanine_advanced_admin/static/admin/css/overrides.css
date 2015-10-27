@@ -614,3 +614,16 @@ a:not([href]) {
     top: -7px;
     left: 5px;
 }
+
+/* TABS */
+.nav-tabs {
+    background: #265a88;
+    border-bottom: 3px solid #42a5f5;
+}
+.nav-tabs li.active {
+    background-color: #42a5f5;
+}
+.nav-tabs li.active a {
+    text-transform: uppercase;
+    /*font-variant: small-caps;*/
+}

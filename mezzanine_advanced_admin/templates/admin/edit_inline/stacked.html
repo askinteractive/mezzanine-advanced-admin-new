@@ -1,6 +1,6 @@
 {% load i18n admin_urls admin_static advanced_admin_tags %}
 <div class="_inline-group panel" id="{{ inline_admin_formset.formset.prefix }}-group">
-    <div class="panel-heading"><a>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</a></div>
+{#    <div class="panel-heading"><a>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</a></div>#}
     {{ inline_admin_formset.formset.management_form }}
 
     {% if inline_admin_formset.formset.non_form_errors %}

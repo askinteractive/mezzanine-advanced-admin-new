@@ -64,19 +64,43 @@
         <div>
         {% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
 
-        {% block field_sets %}
-{#        <p class="col-xs-offset-3 small">{% blocktrans %}Fields in <strong>bold</strong> are required.{% endblocktrans %}</p>#}
-        {% for fieldset in adminform %}
-          {% include "admin/includes/fieldset.html" with group_column_width=adminform|form_fieldset_column_width %}
-        {% endfor %}
+        {% trans "General" as default_tab_name %}
+        {% block field_sets_tabs %}
+            <ul class="nav nav-tabs" role="tablist">
+            {% for fieldset in adminform %}
+                <li role="presentation"{% if forloop.first %} class="active"{% endif %}>
+                    <a href="#{{ fieldset.name|default_if_none:default_tab_name|slugify }}" aria-controls="{{ fieldset.name|default_if_none:default_tab_name|slugify }}" role="tab" data-toggle="tab">{{ fieldset.name|default_if_none:default_tab_name }}</a>
+                </li>
+            {% endfor %}
+            {% for inline_admin_formset in inline_admin_formsets %}
+                <li role="presentation">
+                    <a href="#{{ inline_admin_formset.opts.verbose_name_plural|slugify }}" aria-controls="{{ inline_admin_formset.opts.verbose_name_plural|slugify }}" role="tab" data-toggle="tab">{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}</a>
+                </li>
+            {% endfor %}
+            </ul>
         {% endblock %}
 
-        {% block after_field_sets %}{% endblock %}
+        {% block  field_sets_tabs_content %}
+        <div class="tab-content">
+            {% block field_sets %}
+    {#        <p class="col-xs-offset-3 small">{% blocktrans %}Fields in <strong>bold</strong> are required.{% endblocktrans %}</p>#}
+            {% for fieldset in adminform %}
+            <div role="tabpanel" class="tab-pane{% if forloop.first %} active{% endif %}" id="{{ fieldset.name|default_if_none:default_tab_name|slugify }}">
+              {% include "admin/includes/fieldset.html" with group_column_width=adminform|form_fieldset_column_width %}
+            </div>
+            {% endfor %}
+            {% endblock %}
 
-        {% block inline_field_sets %}
-        {% for inline_admin_formset in inline_admin_formsets %}
-            {% include inline_admin_formset.opts.template %}
-        {% endfor %}
+            {% block after_field_sets %}{% endblock %}
+
+            {% block inline_field_sets %}
+            {% for inline_admin_formset in inline_admin_formsets %}
+            <div role="tabpanel" class="tab-pane" id="{{ inline_admin_formset.opts.verbose_name_plural|slugify }}">
+                {% include inline_admin_formset.opts.template %}
+            </div>
+            {% endfor %}
+            {% endblock %}
+        </div>
         {% endblock %}
 
         {% block after_related_objects %}{% endblock %}
