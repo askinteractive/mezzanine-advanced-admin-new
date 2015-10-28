@@ -638,3 +638,19 @@ a:not([href]) {
 .tab-content fieldset {
     padding-top: 25px;
 }
+
+/* Datepicker */
+.datetimeshortcuts {
+    display: none;
+}
+p.datetime {
+    width: 180px;
+}
+p.datetime input {
+    margin-right: 25px;
+}
+p.datetime a {
+    float: right;
+    text-decoration: none;
+    cursor: pointer;
+}

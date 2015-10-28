@@ -11,7 +11,7 @@ Requirements
 Installation
 ------------
 
-1. Download it
+1. Download it 
 2. Add ``"mezzanine_advanced_admin",``into the ``INSTALLED_APPS`` **before** ``'mezzanine.boot'``
 3. Comment ``PACKAGE_NAME_GRAPPELLI`` and remove ``PACKAGE_NAME_GRAPPELLI`` and ``PACKAGE_NAME_FILEBROWSER`` from ``OPTIONAL_APPS``
 4. Have fun!
@@ -33,13 +33,13 @@ You have to add to your project settings file:
     ADVANCED_ADMIN_FIELD_RENDERER = 'mezzanine_advanced_admin.renderers.BootstrapFieldRenderer'
 
 
-`Messages <http://docs.djangoproject.com/en/dev/ref/contrib/messages>`__ will have ``alert-info`` tag by default,
+`Messages <http://docs.djangoproject.com/en/dev/ref/contrib/messages>`__ will have ``alert-info`` tag by default, 
 so you may want to add Bootstrap 3 tags for different message levels to make them styled appropriately.
 Add to your project settings file:
 ::
 
     from django.contrib import messages
-
+    
     MESSAGE_TAGS = {
                 messages.SUCCESS: 'alert-success success',
                 messages.WARNING: 'alert-warning warning',
