@@ -1,11 +1,15 @@
 {% load i18n admin_static %}
 {% if cl.search_fields %}
 
-<form class="navbar-form navbar-right" role="search" id="changelist-search" action="" method="get">
-    <div class="form-group"><!-- DIV needed for valid HTML -->
+<form role="search" id="changelist-search" action="" method="get">
+    <div class="input-group"><!-- DIV needed for valid HTML -->
         <input type="text" class="form-control search-query" placeholder="{% trans 'Search' %}" size="25" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" />
+        <div class="input-group-btn">
+            <button type="submit" class="btn btn-xs" title="{% trans "Search" %}">
+                <span class="mdi-action-search"></span>
+            </button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-default btn-white">{% trans "Search" %}</button>
 {% if show_result_count %}
     <span class="small quiet">{% blocktrans count counter=cl.result_count %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}_popup=1{% endif %}">{% if cl.show_full_result_count %}{% blocktrans with full_result_count=cl.full_result_count %}{{ full_result_count }} total{% endblocktrans %}{% else %}{% trans "Show all" %}{% endif %}</a>)</span>
 {% endif %}

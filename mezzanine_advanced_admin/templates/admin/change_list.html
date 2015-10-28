@@ -46,91 +46,113 @@
 {% block coltype %}flex{% endblock %}
 
 {% block object-tools %}
-<div id="content-navbar-collapse" class="navbar-collapse collapse">
-    <ul class="object-tools nav pull-right">
+    {% if action_form and actions_on_top and cl.show_admin_actions %}
+    <div class="pull-left">
+    {% admin_actions %}
+    </div>
+    {% endif %}
+
+    <ul class="object-tools pull-right">
         {% block object-tools-items %}
-        {% if has_add_permission %}
-        <li class="add-button">
-        {% url cl.opts|admin_urlname:'add' as add_url %}
-            <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-fab btn-raised btn-material-blue-700" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
-                <i class="mdi-content-add"></i><span></span>
-            </a>
-        </li>
-        {% endif %}
         {% endblock %}
     </ul>
 
-    {% if cl.has_filters %}
-    <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Filter' %} <span class="caret"></span></a>
-            <ul class="dropdown-menu pull-right scrollable-dropdown-menu">
-                {% for spec in cl.filter_specs %}
-                    {% admin_list_filter cl spec %}
-                {% endfor %}
-            </ul>
-        </li>
-    </ul>
-    {% endif %}
-    {% block search %}{% search_form cl %}{% endblock %}
-</div>
+    <div class="pull-right">
+        {% block search %}
+            <div class="pull-right">
+            {% search_form cl %}
+            </div>
+        {% endblock %}
+    </div>
+    <div class="clearfix"></div>
+
+{#</div>#}
 {% endblock %}
 
 {% block content %}
-<form class="" id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
+<div class="panel">
+    <div class="panel-body">
+        <form class="" id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
 
-{% if cl.formset.errors %}
-<div class="alert alert-danger">
-    <p class="errornote">
-        {% if cl.formset.errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-    </p>
-    {{ cl.formset.non_form_errors }}
-</div>
-{% endif %}
+            {# Change list buttons #}
+            <div class="pull-right">
 
+                {# Filter #}
+                {% if cl.has_filters %}
+                <div class="dropdown pull-right">
+                    <button class="dropdown-toggle btn btn-material-blue-grey-50 pull-right" data-toggle="dropdown">
+                        <span class="mdi-content-filter-list"></span>{% trans 'Filter' %} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right scrollable-dropdown-menu">
+                        {% for spec in cl.filter_specs %}
+                            {% admin_list_filter cl spec %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
 
-{% with app_name=cl.opts.model_name|lower|slugify %}
-    {% render_with_template_if_exist cl.opts.app_label|lower|add:"/admin_app_"|add:app_name|add:"_description.html" "" %}
-{% endwith %}
+                {# Save button #}
+                {% if cl.formset and cl.result_count %}
+                <button type="submit" name="_save" class="btn btn-material-blue-400 pull-right">
+                    <span class="mdi-action-done"></span>{% trans 'Save' %}
+                </button>
+                {% endif %}
 
-{% if action_form and actions_on_top and cl.show_admin_actions %}
-<div class='pull-left'>{% admin_actions %}</div>
-{% endif %}
+                        {# Add button #}
+                {% if has_add_permission %}
+                {% url cl.opts|admin_urlname:'add' as add_url %}
+                <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-material-blue-700" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
+                    <i class="mdi-content-add"></i><span></span>{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                </a>
+                {% endif %}
 
-<div id="content-main">
-    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="_changelist">
-        {% block date_hierarchy %}
-            {% date_hierarchy cl %}
-        {% endblock %}
+            </div>
 
-        {% if cl.formset %}
-            <div>{{ cl.formset.management_form }}</div>
-        {% endif %}
-
-        {% block result_list %}
-            {% result_list cl %}
-        {% endblock %}
-    </div>
-</div>
- {% if cl.formset and cl.result_count or action_form and actions_on_bottom and cl.show_admin_actions %}
-<div class="navbar navbar-white">
-    <div class="navbar-inner">
-        <div class="navbar-form pull-left">
-            {% if action_form and actions_on_bottom and cl.show_admin_actions %}
-                {% admin_actions %}
-            {% endif %}
-        </div>
-        {% if cl.formset and cl.result_count %}
-        <div class="navbar-form pull-right">
-            <input type="submit" name="_save" class="btn btn-material-blue-700 default" value="{% trans 'Save' %}"/>
+        {% if cl.formset.errors %}
+        <div class="alert alert-danger">
+            <p class="errornote">
+                {% if cl.formset.errors|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
+            </p>
+            {{ cl.formset.non_form_errors }}
         </div>
         {% endif %}
+
+
+        {% with app_name=cl.opts.model_name|lower|slugify %}
+            {% render_with_template_if_exist cl.opts.app_label|lower|add:"/admin_app_"|add:app_name|add:"_description.html" "" %}
+        {% endwith %}
+
+        <div id="content-main">
+            <div class="module{% if cl.has_filters %} filtered{% endif %}" id="_changelist">
+                {% block date_hierarchy %}
+                    {% date_hierarchy cl %}
+                {% endblock %}
+
+                {% if cl.formset %}
+                    <div>{{ cl.formset.management_form }}</div>
+                {% endif %}
+
+                {% block result_list %}
+                    {% result_list cl %}
+                {% endblock %}
+            </div>
+        </div>
+        {% if action_form and actions_on_bottom and cl.show_admin_actions %}
+        <div>
+            <div class="navbar-inner">
+                <div class="navbar-form pull-left">
+                    {% if action_form and actions_on_bottom and cl.show_admin_actions %}
+                        {% admin_actions %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% block pagination %}
+            {% pagination cl %}
+        {% endblock %}
+        </form>
     </div>
 </div>
- {% endif %}
-
-{% block pagination %}
-    {% pagination cl %}
-{% endblock %}
-</form>
-{% endblock %}
+{% endblock content %}

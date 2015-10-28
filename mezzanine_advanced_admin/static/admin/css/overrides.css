@@ -201,6 +201,11 @@ td.action-checkbox {
 
 #_changelist {clear: both;}
 
+#changelist-search {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .scrollable-dropdown-menu {
     overflow-x: hidden;
     max-height: 322px;
@@ -297,6 +302,9 @@ p.file-upload > input[type="file"] {
 }
 .mr15 {
     margin-right: 15px;
+}
+.mr25 {
+    margin-right: 25px;
 }
 .dashboard {
   padding-top: 0;

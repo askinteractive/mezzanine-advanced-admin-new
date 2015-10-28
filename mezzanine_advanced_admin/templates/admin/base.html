@@ -48,13 +48,24 @@
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "admin/js/jquery-ui.min.js" %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/js/material.js"></script>
-    <script src="{% static "plugins/selectpicker/i18n/defaults-fr_FR.min.js" %}"></script>
+{#    <script src="{% static "plugins/selectpicker/i18n/defaults-fr_FR.min.js" %}"></script>#}
     <script src="{% static "plugins/selectpicker/bootstrap-select.min.js" %}"></script>
     <script src="{% static "admin/js/main.js" %}"></script>
 
     {% block extrahead %}{% endblock %}
 
-    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+    {% block blockbots %}
+        <meta name="robots" content="NONE,NOARCHIVE"/>{% endblock %}
+    <script type="text/javascript">
+        //<![CDATA[
+        (function ($) {
+            $(document).ready(function () {
+                $('input[type="submit"]').addClass('btn');
+                $('[title]').tooltip();
+            });
+        }(jQuery));
+        //]]>
+    </script>
 </head>
 {% load i18n %}
 
@@ -164,31 +175,38 @@
         {% endif %}
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %} col-xs-offset-2">
+{#            {% block navbar %}#}
+{#                <div class="navbar navbar-white">#}
+{#                    <div class="navbar-inner">#}
+{#                        {% block pretitle %}{% endblock %}#}
+{#                        <div class="navbar-header">#}
+{#                            {% block content-navbar-collapse %}#}
+{#                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
+{#                                        data-target="#content-navbar-collapse" aria-expanded="false"#}
+{#                                        aria-controls="navbar">#}
+{#                                    <span class="sr-only">Toggle navigation</span>#}
+{#                                    <span class="icon-bar"></span>#}
+{#                                    <span class="icon-bar"></span>#}
+{#                                    <span class="icon-bar"></span>#}
+{#                                </button>#}
+{#                            {% endblock %}#}
+{#                            {% block content_title %}#}
+{#                                {% if title %}#}
+{#                                    <span class="navbar-brand">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</span>#}
+{#                                {% endif %}#}
+{#                            {% endblock %}#}
+{#                        </div>#}
+{#                        {% block object-tools %}{% endblock %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endblock navbar %}#}
             {% block navbar %}
-                <div class="navbar navbar-white">
-                    <div class="navbar-inner">
-                        {% block pretitle %}{% endblock %}
-                        <div class="navbar-header">
-                            {% block content-navbar-collapse %}
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                        data-target="#content-navbar-collapse" aria-expanded="false"
-                                        aria-controls="navbar">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            {% endblock %}
-                            {% block content_title %}
-                                {% if title %}
-                                    <span class="navbar-brand">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</span>
-                                {% endif %}
-                            {% endblock %}
-                        </div>
-                        {% block object-tools %}{% endblock %}
-                    </div>
-                </div>
-            {% endblock navbar %}
+            <div class="">
+{#                {% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}#}
+                {% block object-tools %}{% endblock %}
+                <div class="clearfix"></div>
+            </div>
+            {% endblock %}
 
             {% block messages %}
                 {% if messages %}
