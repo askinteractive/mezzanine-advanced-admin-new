@@ -201,8 +201,8 @@
 {#                </div>#}
 {#            {% endblock navbar %}#}
             {% block navbar %}
-            <div class="">
-{#                {% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}#}
+            <div class="object-tools-wrapper">
+                <h3 class="content-title mb25">{% render_with_template_if_exist title|lower|add:"/admin_app_name.html" title %}</h3>
                 {% block object-tools %}{% endblock %}
                 <div class="clearfix"></div>
             </div>

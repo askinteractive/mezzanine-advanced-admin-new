@@ -205,6 +205,13 @@ td.action-checkbox {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+.object-tools-wrapper .content-title {
+    border-bottom: 1px dashed rgba(210, 210, 210, 0.8);
+    padding-bottom: 15px;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 16px;
+}
 
 .scrollable-dropdown-menu {
     overflow-x: hidden;
@@ -221,6 +228,9 @@ td.action-checkbox {
     white-space: nowrap;
 }
 
+#content {
+    padding: 0px 15px;
+}
 #content-main {
     clear: both;
     padding-top: 20px;

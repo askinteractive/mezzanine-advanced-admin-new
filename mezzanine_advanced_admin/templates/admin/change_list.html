@@ -52,11 +52,6 @@
     </div>
     {% endif %}
 
-    <ul class="object-tools pull-right">
-        {% block object-tools-items %}
-        {% endblock %}
-    </ul>
-
     <div class="pull-right">
         {% block search %}
             <div class="pull-right">
@@ -64,7 +59,14 @@
             </div>
         {% endblock %}
     </div>
+
     <div class="clearfix"></div>
+
+    <ul class="object-tools">
+        {% block object-tools-items %}
+        {% endblock %}
+    </ul>
+
 
 {#</div>#}
 {% endblock %}
@@ -98,7 +100,7 @@
                 </button>
                 {% endif %}
 
-                        {# Add button #}
+                {# Add button #}
                 {% if has_add_permission %}
                 {% url cl.opts|admin_urlname:'add' as add_url %}
                 <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-material-blue-700" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
