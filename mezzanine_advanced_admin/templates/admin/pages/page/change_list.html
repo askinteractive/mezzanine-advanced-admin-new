@@ -21,7 +21,7 @@
     <div class="row">
         <div id="menu-filter" class="col-xs-10 radioselect">
             {% get_menus_for_page as menus %}
-            <p>{% trans "Filter by menu" %} ...</p>
+            <p class="sr-only">{% trans "Filter by menu" %} ...</p>
             <div class="radio radio-material-blue-700">
                 <label>
                     <input type="radio" value="all-menus" name="menu_filter" checked>
@@ -43,22 +43,15 @@
         </div>
 
         {% if has_add_permission %}
-        <div id="addlist-primary">
-            <div class="dropdown">
-                <a class="btn btn-material-blue-700 btn-fab btn-raised mdi-content-add" type="button" id="addpage" data-toggle="dropdown" aria-haspopup="true">
-                    <span class="sr-only">{% trans "Add" %} ...</span>
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="addpage">
-                    {% for model in page_models %}
-                        <li>
-                            {% set_model_permissions model %}
-                            {% if model.perms.add %}
-                                <a href="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</a>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+        <div id="addlist-primary" class="col-xs-2">
+            <select title="{% trans "Add" %} ..." class="selectpicker" data-style="btn-material-blue-700" onchange="window.location.href=this.value" data-width="auto">
+                {% for model in page_models %}
+                    {% set_model_permissions model %}
+                    {% if model.perms.add %}
+                    <option value="{{ model.add_url }}">{{ model.meta_verbose_name|capfirst }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
         </div>
         {% endif %}
 

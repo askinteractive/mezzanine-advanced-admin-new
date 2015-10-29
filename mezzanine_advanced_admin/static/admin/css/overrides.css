@@ -620,14 +620,6 @@ a:not([href]) {
     margin-top: 10px;
 }
 
-
-#addlist-primary, .nav .add-button {
-    position: fixed;
-    bottom: 25px;
-    right: 40px;
-    z-index: 100000;
-}
-
 .nav .add-button i {
     top: -7px;
     left: 5px;
