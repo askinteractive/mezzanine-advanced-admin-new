@@ -4,6 +4,7 @@
 {% block extrahead %}{{ block.super }}
 {% url 'admin:jsi18n' as jsi18nurl %}
 <script type="text/javascript" src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+<script type="text/javascript" src="{% static "plugins/scrolltofixed.min.js" %}"></script>
 <script type="text/javascript" src="{% static "plugins/material-datepicker/moment.js" %}"></script>
 <script type="text/javascript" src="{% static "plugins/material-datepicker/material-datepicker.js" %}"></script>
 {{ media }}
@@ -33,6 +34,19 @@ $(document).ready(function () {
         var attachedInput = $(this).prev().prev();
         attachedInput.bootstrapMaterialDatePicker("_onClick");
     }));
+    /**/
+    $('.form-actions').scrollToFixed({
+        marginTop: 60,
+        preFixed: function() {
+            $(this).addClass('fixed')
+        },
+        postFixed: function() {
+            $(this).removeClass('fixed')
+        }
+    });
+    $('.form-tabs').scrollToFixed({
+        marginTop: 154,
+    });
 });
 </script>
 {% endblock %}
@@ -50,27 +64,34 @@ $(document).ready(function () {
 {% if not is_popup %}
 {% block breadcrumbs %}
 <ul class="breadcrumb">
-<li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
-<li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_label=opts.app_config.verbose_name|default:opts.app_label %}{{ app_label|title }}{% endwith %}</a></li>
-<li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
-<li>{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
+    <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></li>
+    <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_label=opts.app_config.verbose_name|default:opts.app_label %}{{ app_label|title }}{% endwith %}</a></li>
+    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
+    <li>{% if add %}{% trans 'Add' %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
 </ul>
 {% endblock %}
 {% endif %}
 
 {% block object-tools %}
 {% if change %}{% if not is_popup %}
-<div id="content-navbar-collapse" class="navbar-collapse collapse">
-  <ul class="nav navbar-nav navbar-right">
+  <ul>
     {% block object-tools-items %}
     <li>
         {% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-        <a role="button" href="{% add_preserved_filters history_url %}" class="historylink">{% trans "History" %}</a>
+        <a role="button" href="{% add_preserved_filters history_url %}" class="historylink" title="{% trans "History" %}">
+            <span class="mdi-action-restore"></span>
+            <span>{% trans "History" %}</span>
+        </a>
     </li>
-    {% if has_absolute_url %}<li><a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif %}
+    {% if has_absolute_url %}
+        <li>
+            <a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="viewsitelink" title="{% trans "View on site" %}" target="_blank">
+                <span class="mdi-action-exit-to-app"></span>
+                <span>{% trans "View on site" %}</span>
+            </a>
+        </li>{% endif %}
     {% endblock %}
   </ul>
-</div>
 {% endif %}{% endif %}
 {% endblock %}
 
@@ -89,7 +110,9 @@ $(document).ready(function () {
     </div>
     {% endif %}
 
-    {% if save_on_top %}{% block submit_buttons_top %}{% submit_row %}{% endblock %}{% endif %}
+    <div class="form-actions">
+    {% block submit_buttons_top %}{% submit_row %}{% endblock %}
+    </div>
 
     <div id="content-main">
         <div>
@@ -97,7 +120,7 @@ $(document).ready(function () {
 
         {% trans "General" as default_tab_name %}
         {% block field_sets_tabs %}
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs form-tabs" role="tablist">
             {% for fieldset in adminform %}
                 <li role="presentation"{% if forloop.first %} class="active"{% endif %}>
                     <a href="#{{ fieldset.name|default_if_none:default_tab_name|slugify }}" aria-controls="{{ fieldset.name|default_if_none:default_tab_name|slugify }}" role="tab" data-toggle="tab">{{ fieldset.name|default_if_none:default_tab_name }}</a>
@@ -163,8 +186,10 @@ $(document).ready(function () {
         </div>
     </div>
 
+    {% comment %}
     <div class="form-actions">
         {% block submit_buttons_bottom %}{% submit_row %}{% endblock %}
     </div>
+    {% endcomment %}
 </form>
 {% endblock %}

@@ -46,6 +46,34 @@
 {% block coltype %}flex{% endblock %}
 
 {% block object-tools %}
+{#    {% if action_form and actions_on_top and cl.show_admin_actions %}#}
+{#    <div class="pull-left">#}
+{#    {% admin_actions %}#}
+{#    </div>#}
+{#    {% endif %}#}
+{##}
+{#    <div class="pull-right">#}
+{#        {% block search %}#}
+{#            <div class="pull-right">#}
+{#            {% search_form cl %}#}
+{#            </div>#}
+{#        {% endblock %}#}
+{#    </div>#}
+{##}
+{#    <div class="clearfix"></div>#}
+
+    <ul class="object-tools-items">
+        {% block object-tools-items %}
+        {% endblock %}
+    </ul>
+
+
+{#</div>#}
+{% endblock %}
+
+{% block content %}
+
+<div class="mt25">
     {% if action_form and actions_on_top and cl.show_admin_actions %}
     <div class="pull-left">
     {% admin_actions %}
@@ -59,19 +87,9 @@
             </div>
         {% endblock %}
     </div>
-
     <div class="clearfix"></div>
+</div>
 
-    <ul class="object-tools">
-        {% block object-tools-items %}
-        {% endblock %}
-    </ul>
-
-
-{#</div>#}
-{% endblock %}
-
-{% block content %}
 <div class="panel">
     <div class="panel-body">
         <form class="" id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %} novalidate>{% csrf_token %}
@@ -83,7 +101,8 @@
                 {% if cl.has_filters %}
                 <div class="dropdown pull-right">
                     <button class="dropdown-toggle btn btn-material-blue-grey-50 pull-right" data-toggle="dropdown">
-                        <span class="mdi-content-filter-list"></span>{% trans 'Filter' %} <span class="caret"></span>
+                        <span class="mdi-content-filter-list"></span>
+                        <span>{% trans 'Filter' %} <span class="caret"></span></span>
                     </button>
                     <ul class="dropdown-menu pull-right scrollable-dropdown-menu">
                         {% for spec in cl.filter_specs %}
@@ -96,7 +115,8 @@
                 {# Save button #}
                 {% if cl.formset and cl.result_count %}
                 <button type="submit" name="_save" class="btn btn-material-blue-400 pull-right">
-                    <span class="mdi-action-done"></span>{% trans 'Save' %}
+                    <span class="mdi-action-done"></span>
+                    <span>{% trans 'Save' %}</span>
                 </button>
                 {% endif %}
 
@@ -104,7 +124,8 @@
                 {% if has_add_permission %}
                 {% url cl.opts|admin_urlname:'add' as add_url %}
                 <a role="button" href="{% add_preserved_filters add_url is_popup %}" class="btn btn-material-blue-700" title="{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}">
-                    <i class="mdi-content-add"></i><span></span>{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                    <span class="mdi-content-add"></span>
+                    <span>{% blocktrans with cl.opts.verbose_name as name %}Add{% endblocktrans %}</span>
                 </a>
                 {% endif %}
 

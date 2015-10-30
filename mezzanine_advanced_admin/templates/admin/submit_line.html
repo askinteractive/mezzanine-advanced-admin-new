@@ -1,30 +1,43 @@
 {% load i18n admin_urls %}
 <div class="pull-left">
+    <button name="back" type="submit" class="btn btn-material-blue-grey-100" title="{% trans "Back" %}">
+        <span class="mdi-content-undo"></span>
+        <span class="hidden-xs">{% trans "Back" %}</span>
+    </button>
     {% if show_delete_link %}
-        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
-        <a class="btn btn-danger deletelink" href="{% add_preserved_filters delete_url %}">
-            <span class="visible-xs"><span class="glyphicon glyphicon-remove"></span></span><span>{% trans "Delete" %}</span>
-        </a>
+    {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+    <a class="btn btn-danger deletelink" href="{% add_preserved_filters delete_url %}" title="{% trans "Delete" %}">
+        <span class="mdi-content-clear"></span>
+        <span class="hidden-xs">{% trans "Delete" %}</span>
+    </a>
     {% endif %}
 </div>
 <div class="pull-right">
 {% if show_save_as_new %}
-    <button type="submit" class="btn btn-default" name="_saveasnew" {{ onclick_attrib }}>{% trans 'Save as new' %}</button>
+    <button type="submit" class="btn btn-material-blue-400" name="_saveasnew" {{ onclick_attrib }} title="{% trans 'Save as new' %}">
+        <span class="mdi-action-done"></span>
+        <span class="hidden-xs">{% trans 'Save as new' %}</span>
+    </button>
 {% endif %}
 {% if show_save_and_add_another %}
-    <button type="submit" class="btn btn-default" name="_addanother" {{ onclick_attrib }}>
-        <span class="visible-xs"><span class="glyphicon glyphicon-floppy-disk"></span> & <span class="glyphicon glyphicon-plus-sign"></span></span><span class="hidden-xs">{% trans 'Save and add another' %}</span>
+    <button type="submit" class="btn btn-material-blue-400" name="_addanother" {{ onclick_attrib }} title="{% trans 'Save and add another' %}">
+        <span class="mdi-action-done"></span>
+        <span class="mdi-content-add"></span>
+        <span class="hidden-xs">{% trans 'Save and add another' %}</span>
     </button>
 {% endif %}
 {% if show_save_and_continue %}
-    <button type="submit" class="btn btn-default" name="_continue" {{ onclick_attrib }}>
-        <span class="visible-xs"><span class="glyphicon glyphicon-floppy-disk"></span><span class="glyphicon glyphicon-pencil hidden"></span></span><span>{% trans 'Save and continue editing' %}</span>
+    <button type="submit" class="btn btn-material-blue-400" name="_continue" {{ onclick_attrib }} title="{% trans 'Save and continue editing' %}">
+        <span class="mdi-action-done"></span>
+        <span class="mdi-content-redo"></span>
+        <span class="hidden-xs">{% trans 'Save and continue editing' %}</span>
     </button>
 {% endif %}
 {% if show_save %}
-    <button type="submit" class="btn btn-primary" name="_save" {{ onclick_attrib }}>
-        <span class="visible-xs"><span class="glyphicon glyphicon-floppy-disk"></span></span><span class="hidden-xs">{% trans 'Save' %}</span>
+    <button type="submit" class="btn btn-material-blue-700" name="_save" {{ onclick_attrib }} title="{% trans 'Save' %}">
+        <span class="mdi-action-done"></span>
+        <span class="hidden-xs">{% trans 'Save' %}</span>
     </button>
 {% endif %}
 </div>
-<div class="spacer"></div>
+<div class="clearfix"></div>

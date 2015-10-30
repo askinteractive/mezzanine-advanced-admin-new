@@ -205,14 +205,25 @@ td.action-checkbox {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.object-tools-wrapper .content-title {
+.object-tools-wrapper {
     border-bottom: 1px dashed rgba(210, 210, 210, 0.8);
-    padding-bottom: 15px;
+}
+.object-tools-wrapper .content-title {
     color: #333;
     text-transform: uppercase;
     font-size: 16px;
 }
-
+.object-tools {
+}
+.object-tools ul {
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+.object-tools ul li {
+    display: inline-block;
+    padding: 15px;
+}
 .scrollable-dropdown-menu {
     overflow-x: hidden;
     max-height: 322px;
@@ -283,6 +294,9 @@ td.action-checkbox {
     width: auto;
     display: inline;
 }
+.form-control:focus, .form-control.focus {
+    background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#d2d2d2, #d2d2d2);
+}
 
 .spacer {
     margin-bottom: 20px;
@@ -315,6 +329,9 @@ p.file-upload > input[type="file"] {
 }
 .mr25 {
     margin-right: 25px;
+}
+.mt25 {
+    margin-top: 25px;
 }
 .dashboard {
   padding-top: 0;
@@ -579,8 +596,20 @@ a:hover {
 a:not([href]) {
     cursor: default;
 }
+a.btn {
+    color: rgba(255, 255, 255, 0.84) !important;
+}
+.btn {
+    font-size: 12px;
+}
 [class^="mdi-"], [class*="mdi-"] {
-    transform: translate(-4px, 4px) !important;
+    transform: translate(-2px, 2px) !important;
+    text-decoration: none !important;
+}
+[class^="mdi-"] + *:not([class^="mdi-"]):not([class*="mdi-"]),
+[class*="mdi-"] + *:not([class^="mdi-"]):not([class*="mdi-"]) {
+    position: relative;
+    top: -2px;
 }
 .multicheckbox .checkbox,
 .radioselect .radio {
@@ -630,6 +659,10 @@ a:not([href]) {
     background: #265a88;
     border-bottom: 3px solid #42a5f5;
 }
+.nav-tabs-bottom {
+    border-top: 3px solid #42a5f5;
+    border-bottom: none;
+}
 .nav-tabs li.active {
     background-color: #42a5f5;
 }
@@ -639,6 +672,10 @@ a:not([href]) {
 }
 .tab-content fieldset {
     padding-top: 25px;
+}
+.tab-content .panel {
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 /* Datepicker */
@@ -655,4 +692,27 @@ p.datetime a {
     float: right;
     text-decoration: none;
     cursor: pointer;
+}
+.form-actions {
+    padding: 15px 25px;
+    background-color: #efefef;
+}
+.form-actions.fixed {
+    width: 100%;
+    box-shadow: 0 1px 6px -2px rgba(0, 0, 0, 0.12), 0 1px 6px -2px rgba(0, 0, 0, 0.12);
+}
+
+#entries-form td,
+#entries-form th {
+    vertical-align: middle;
+}
+#entries-form .checkbox {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 18px;
+}
+#entries-form .checkbox label {
+    margin: 0;
+    padding: 0;
 }

@@ -20,7 +20,7 @@
 
 {% block content %}
 <div id="content-main">
-    <form method="post" class="table-responsive">
+    <form method="post" class="table-responsive" id="entries-form">
     {% csrf_token %}
     <table class="table table-striped table-hover">
         <thead>
@@ -76,11 +76,19 @@
         </tbody>
     </table>
 
-    <button type="submit" name="back" class="btn pull-left"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</button>
-        <input type="submit" name="back" class="btn pull-left" value="{% trans "Back to form" %}"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</input>
+    <button type="submit" name="back" class="btn pull-left">
+        <span class="mdi-navigation-arrow-back"></span>
+        <span>{% trans "Back to form" %}</span>
+    </button>
 
-    <button type="submit" class="btn btn-material-blue-400 pull-right" name="export"><i class="mdi-file-file-download"></i>{% trans "Export CSV" %}</button>
-    <button type="submit" class="btn btn-material-blue-700 pull-right"><i class="mdi-action-view-list"></i>{% trans "View entries" %}</button>
+    <button type="submit" class="btn btn-material-blue-400 pull-right" name="export">
+        <span class="mdi-file-file-download"></span>
+        <span>{% trans "Export CSV" %}</span>
+    </button>
+    <button type="submit" class="btn btn-material-blue-700 pull-right">
+        <span class="mdi-action-view-list"></span>
+        <span>{% trans "View entries" %}</span>
+    </button>
     <div class="clearfix"></div>
 
     {% if submitted %}
@@ -91,7 +99,7 @@
         <div class="panel-body table-responsive">
             {% for row in entries_form.rows %}
             {% if forloop.first %}
-            <table class="table table-striped table-bordered">
+            <table class="table table-striped">
                 <tr>
                     {% if can_delete_entries %}
                     <th>
@@ -112,7 +120,7 @@
             {% endif %}
                 <tr class="{% cycle on,off %}">
                     {% if can_delete_entries %}
-                    <td class="include">
+                    <td class="include" valign="middle">
                         <div class="checkbox checkbox-material-blue-700">
                             <label>
                                 <input type="checkbox" name="selected" value="{{ row.0 }}">
@@ -125,7 +133,7 @@
                     {% endif %}
                     {% for field in row %}
                     {% if not forloop.first %}
-                    <td{% if forloop.last %} class="last"{% endif %}>{{ field }}</td>
+                    <td{% if forloop.last %} class="last"{% endif %} valign="middle">{{ field }}</td>
                     {% endif %}
                     {% endfor %}
                 </tr>
@@ -145,8 +153,14 @@
         </div>
     </div>
     {% if can_delete_entries %}
-    <button type="submit" name="back" class="btn pull-left"><i class="mdi-navigation-arrow-back"></i>{% trans "Back to form" %}</button>
-    <button type="submit" name="delete" class="btn btn-material-red-400 pull-right">{% trans "Delete selected" %}</button>
+    <button type="submit" name="back" class="btn pull-left">
+        <span class="mdi-navigation-arrow-back"></span>
+        <span>{% trans "Back to form" %}</span>
+    </button>
+    <button type="submit" name="delete" class="btn btn-material-red-400 pull-right">
+        <span class="mdi-content-clear"></span>
+        <span>{% trans "Delete selected" %}</span>
+    </button>
     {% endif %}
     {% endif %}
     </form>
